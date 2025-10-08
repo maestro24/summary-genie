@@ -1,0 +1,505 @@
+/**
+ * SummaryGenie 에러 핸들링 관련 스타일
+ * 토스트, 에러 오버레이, 로딩 상태 등
+ */
+
+/* ===== 에러 토스트 스타일 ===== */
+.sg-toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 12px 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 999999;
+  opacity: 0;
+  transition: all 0.3s ease;
+  max-width: 400px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.sg-toast.sg-toast-show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+.sg-toast-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.sg-toast-message {
+  color: #333;
+  flex: 1;
+}
+
+/* 토스트 타입별 스타일 */
+.sg-toast.sg-toast-success {
+  background: #f0f9ff;
+  border: 1px solid #0ea5e9;
+}
+
+.sg-toast.sg-toast-error {
+  background: #fef2f2;
+  border: 1px solid #ef4444;
+}
+
+.sg-toast.sg-toast-error .sg-toast-message {
+  color: #991b1b;
+}
+
+.sg-toast.sg-toast-warning {
+  background: #fffbeb;
+  border: 1px solid #f59e0b;
+}
+
+.sg-toast.sg-toast-warning .sg-toast-message {
+  color: #92400e;
+}
+
+.sg-toast.sg-toast-info {
+  background: #f0f9ff;
+  border: 1px solid #3b82f6;
+}
+
+/* ===== 에러 토스트 (컨텐트 스크립트용) ===== */
+.sg-error-toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  min-width: 320px;
+  max-width: 420px;
+  z-index: 999999;
+  opacity: 0;
+  transform: translateX(400px);
+  transition: all 0.3s ease;
+}
+
+.sg-error-toast.sg-error-toast-show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.sg-error-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.sg-error-icon {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.sg-error-message {
+  flex: 1;
+  color: #374151;
+  font-size: 14px;
+  line-height: 1.5;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ===== 오버레이 개선된 스타일 ===== */
+.summarygenie-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 999998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.summarygenie-overlay.sg-overlay-show {
+  opacity: 1;
+}
+
+.sg-overlay-container {
+  background: #ffffff;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
+.summarygenie-overlay.sg-overlay-show .sg-overlay-container {
+  transform: scale(1);
+}
+
+/* 최소화 상태 */
+.summarygenie-overlay.sg-overlay-minimized .sg-overlay-container {
+  max-height: 60px;
+  overflow: hidden;
+}
+
+.summarygenie-overlay.sg-overlay-minimized .sg-overlay-body {
+  display: none;
+}
+
+/* ===== 오버레이 헤더 ===== */
+.sg-overlay-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 16px 16px 0 0;
+  color: white;
+}
+
+.sg-overlay-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.sg-badge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  margin-left: 8px;
+}
+
+.sg-overlay-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.sg-minimize-btn,
+.sg-close-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.sg-minimize-btn:hover,
+.sg-close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ===== 오버레이 바디 ===== */
+.sg-overlay-body {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* ===== 에러 컨테이너 ===== */
+.sg-error-container {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.sg-error-container .sg-error-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.sg-error-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.sg-error-container .sg-error-message {
+  color: #6b7280;
+  margin-bottom: 24px;
+}
+
+.sg-retry-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sg-retry-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
+/* ===== 로딩 상태 (개선) ===== */
+.sg-loading {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.sg-spinner-container {
+  margin-bottom: 24px;
+}
+
+.sg-spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #e5e7eb;
+  border-top-color: #667eea;
+  border-radius: 50%;
+  margin: 0 auto;
+  animation: sg-spin 1s linear infinite;
+}
+
+@keyframes sg-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.sg-loading-text {
+  margin-bottom: 16px;
+}
+
+.sg-loading-message {
+  color: #111827;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.sg-loading-dots {
+  display: inline-block;
+  animation: sg-dots 1.5s infinite;
+}
+
+@keyframes sg-dots {
+  0%, 20% { content: '.'; }
+  40% { content: '..'; }
+  60%, 100% { content: '...'; }
+}
+
+.sg-loading-tips {
+  color: #6b7280;
+  font-size: 14px;
+  margin-top: 12px;
+  padding: 12px;
+  background: #f9fafb;
+  border-radius: 8px;
+}
+
+.sg-cancel-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background 0.2s;
+}
+
+.sg-cancel-btn:hover {
+  background: #dc2626;
+}
+
+/* ===== 요약 결과 스타일 ===== */
+.sg-summary-result {
+  animation: sg-fade-in 0.5s ease;
+}
+
+@keyframes sg-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sg-summary-meta {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.sg-meta-item {
+  color: #6b7280;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sg-summary-text {
+  color: #111827;
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  text-align: left;
+  white-space: pre-wrap;
+}
+
+/* ===== 액션 버튼들 ===== */
+.sg-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sg-actions button {
+  flex: 1;
+  min-width: 100px;
+  padding: 8px 16px;
+  border: 1px solid #e5e7eb;
+  background: white;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #374151;
+}
+
+.sg-actions button:hover {
+  background: #f9fafb;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.sg-actions button .sg-icon {
+  font-size: 16px;
+}
+
+/* 주요 버튼 강조 */
+.sg-copy-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  color: white !important;
+  border: none !important;
+}
+
+.sg-copy-btn:hover {
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4) !important;
+}
+
+/* ===== 반응형 디자인 ===== */
+@media (max-width: 640px) {
+  .sg-overlay-container {
+    width: 95%;
+    max-height: 90vh;
+  }
+  
+  .sg-actions {
+    flex-direction: column;
+  }
+  
+  .sg-actions button {
+    width: 100%;
+  }
+  
+  .sg-error-toast {
+    right: 10px;
+    left: 10px;
+    min-width: auto;
+  }
+}
+
+/* ===== 다크 모드 지원 ===== */
+@media (prefers-color-scheme: dark) {
+  .sg-overlay-container {
+    background: #1f2937;
+    color: #f3f4f6;
+  }
+  
+  .sg-overlay-header {
+    background: linear-gradient(135deg, #4c1d95 0%, #5b21b6 100%);
+  }
+  
+  .sg-summary-text,
+  .sg-error-title {
+    color: #f3f4f6;
+  }
+  
+  .sg-error-container .sg-error-message,
+  .sg-meta-item,
+  .sg-loading-tips {
+    color: #9ca3af;
+  }
+  
+  .sg-actions button {
+    background: #374151;
+    border-color: #4b5563;
+    color: #f3f4f6;
+  }
+  
+  .sg-actions button:hover {
+    background: #4b5563;
+  }
+  
+  .sg-loading-tips {
+    background: #374151;
+  }
+  
+  .sg-spinner {
+    border-color: #4b5563;
+    border-top-color: #818cf8;
+  }
+}
+
+/* ===== 접근성 개선 ===== */
+.sg-overlay-container:focus-visible,
+.sg-actions button:focus-visible {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
+/* 애니메이션 감소 선호 사용자 */
+@media (prefers-reduced-motion: reduce) {
+  .sg-toast,
+  .sg-error-toast,
+  .summarygenie-overlay,
+  .sg-overlay-container,
+  .sg-spinner {
+    transition: none;
+    animation: none;
+  }
+}

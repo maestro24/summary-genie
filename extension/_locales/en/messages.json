@@ -1,0 +1,587 @@
+{
+  "appTitle": {
+    "message": "SummaryGenie"
+  },
+  "generalSettings": {
+    "message": "General Settings"
+  },
+  "interfaceLanguage": {
+    "message": "Interface Language"
+  },
+  "theme": {
+    "message": "Theme"
+  },
+  "themeLight": {
+    "message": "Light"
+  },
+  "themeDark": {
+    "message": "Dark"
+  },
+  "themeAuto": {
+    "message": "Follow System"
+  },
+  "defaultSummaryLength": {
+    "message": "Default Summary Length"
+  },
+  "summaryLength": {
+    "message": "Summary Length"
+  },
+  "lengthShort": {
+    "message": "Short"
+  },
+  "lengthMedium": {
+    "message": "Medium"
+  },
+  "lengthDetailed": {
+    "message": "Detailed"
+  },
+  "lengthShortWithDesc": {
+    "message": "Short (2-3 sentences)"
+  },
+  "lengthMediumWithDesc": {
+    "message": "Medium (4-5 sentences)"
+  },
+  "lengthDetailedWithDesc": {
+    "message": "Detailed (7-10 sentences)"
+  },
+  "apiSettings": {
+    "message": "API Settings"
+  },
+  "apiMode": {
+    "message": "API Mode"
+  },
+  "proxyServer": {
+    "message": "Proxy Server (Recommended)"
+  },
+  "directConnection": {
+    "message": "Direct Connection (Dev Only)"
+  },
+  "proxyServerHelp": {
+    "message": "Using a proxy server keeps your API key safe."
+  },
+  "proxyUrl": {
+    "message": "Proxy Server URL"
+  },
+  "proxyUrlHelp": {
+    "message": "Enter your backend proxy server address."
+  },
+  "apiKey": {
+    "message": "OpenAI API Key"
+  },
+  "showHide": {
+    "message": "Show/Hide"
+  },
+  "apiKeyWarning": {
+    "message": "⚠️ Direct connection is not recommended for security. Use only for development and testing."
+  },
+  "usageStatistics": {
+    "message": "Usage Statistics"
+  },
+  "todayUsage": {
+    "message": "Today's Usage"
+  },
+  "weeklyUsage": {
+    "message": "This Week"
+  },
+  "monthlyUsage": {
+    "message": "This Month"
+  },
+  "totalUsage": {
+    "message": "Total Usage"
+  },
+  "recentUsageChart": {
+    "message": "Last 7 Days Usage"
+  },
+  "historyManagement": {
+    "message": "History Management"
+  },
+  "viewHistory": {
+    "message": "View History"
+  },
+  "exportHistory": {
+    "message": "Export (JSON)"
+  },
+  "importHistory": {
+    "message": "Import"
+  },
+  "deleteHistory": {
+    "message": "Delete History"
+  },
+  "cloudSync": {
+    "message": "Cloud Sync"
+  },
+  "syncStatus": {
+    "message": "Sync Status"
+  },
+  "lastSync": {
+    "message": "Last Sync"
+  },
+  "pendingItems": {
+    "message": "Pending Items"
+  },
+  "syncToCloud": {
+    "message": "Sync to Cloud"
+  },
+  "manualSync": {
+    "message": "Manual Sync"
+  },
+  "online": {
+    "message": "Online"
+  },
+  "offline": {
+    "message": "Offline"
+  },
+  "neverSynced": {
+    "message": "Never Synced"
+  },
+  "syncing": {
+    "message": "Syncing..."
+  },
+  "synced": {
+    "message": "Synced"
+  },
+  "pendingSyncItems": {
+    "message": "$1 items pending sync",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "syncCompleted": {
+    "message": "$1 items synced",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "10"
+      }
+    }
+  },
+  "syncFailed": {
+    "message": "Sync Failed"
+  },
+  "confirmCloudSync": {
+    "message": "Upload local history to cloud? Your history will be available on all devices."
+  },
+  "upload": {
+    "message": "Upload"
+  },
+  "cloudSyncSuccess": {
+    "message": "Sync complete! Total $1 (uploaded: $2, downloaded: $3)",
+    "placeholders": {
+      "total": {
+        "content": "$1",
+        "example": "20"
+      },
+      "uploaded": {
+        "content": "$2",
+        "example": "10"
+      },
+      "downloaded": {
+        "content": "$3",
+        "example": "10"
+      }
+    }
+  },
+  "cloudSyncFailed": {
+    "message": "Cloud sync failed"
+  },
+  "noItemsToSync": {
+    "message": "No items to sync"
+  },
+  "keyboardShortcuts": {
+    "message": "Keyboard Shortcuts"
+  },
+  "summarizePage": {
+    "message": "Summarize Current Page"
+  },
+  "focusQuestion": {
+    "message": "Focus Question Input"
+  },
+  "openHistory": {
+    "message": "Open History"
+  },
+  "closePopup": {
+    "message": "Close Popup"
+  },
+  "information": {
+    "message": "Information"
+  },
+  "version": {
+    "message": "Version"
+  },
+  "developer": {
+    "message": "Developer"
+  },
+  "contact": {
+    "message": "Contact"
+  },
+  "privacyPolicy": {
+    "message": "Privacy Policy"
+  },
+  "termsOfService": {
+    "message": "Terms of Service"
+  },
+  "resetSettings": {
+    "message": "Reset"
+  },
+  "saveSettings": {
+    "message": "Save"
+  },
+  "confirm": {
+    "message": "Confirm"
+  },
+  "cancel": {
+    "message": "Cancel"
+  },
+  "reset": {
+    "message": "Reset"
+  },
+  "delete": {
+    "message": "Delete"
+  },
+  "confirmReset": {
+    "message": "Reset all settings to default values?"
+  },
+  "confirmDeleteHistory": {
+    "message": "Delete all history? This action cannot be undone."
+  },
+  "toastSettingsSaved": {
+    "message": "Settings saved"
+  },
+  "toastResetComplete": {
+    "message": "Settings reset"
+  },
+  "toastHistoryCleared": {
+    "message": "History cleared"
+  },
+  "toastCopied": {
+    "message": "Copied"
+  },
+  "toastSaved": {
+    "message": "Saved"
+  },
+  "toastError": {
+    "message": "An error occurred"
+  },
+  "noHistory": {
+    "message": "No history"
+  },
+  "noHistoryExport": {
+    "message": "No history to export"
+  },
+  "historyExported": {
+    "message": "$1 histories exported",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "15"
+      }
+    }
+  },
+  "historyImported": {
+    "message": "$1 new histories imported",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "8"
+      }
+    }
+  },
+  "importFailed": {
+    "message": "Cannot import file"
+  },
+  "historyDeleteFailed": {
+    "message": "Failed to delete history"
+  },
+  "noData": {
+    "message": "No data"
+  },
+  "times": {
+    "message": "times"
+  },
+  "unlimited": {
+    "message": "Unlimited"
+  },
+  "justNow": {
+    "message": "Just now"
+  },
+  "minutesAgo": {
+    "message": "$1 minutes ago",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "hoursAgo": {
+    "message": "$1 hours ago",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "2"
+      }
+    }
+  },
+  "daysAgo": {
+    "message": "$1 days ago",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "historyTitle": {
+    "message": "Summary History"
+  },
+  "searchHistory": {
+    "message": "Search..."
+  },
+  "filterAll": {
+    "message": "All Time"
+  },
+  "filterToday": {
+    "message": "Today"
+  },
+  "filterWeek": {
+    "message": "This Week"
+  },
+  "filterMonth": {
+    "message": "This Month"
+  },
+  "detailViewTitle": {
+    "message": "Summary Details"
+  },
+  "openPage": {
+    "message": "Open Page"
+  },
+  "summaryContent": {
+    "message": "Summary Content"
+  },
+  "qaHistory": {
+    "message": "Q&A History"
+  },
+  "noTitle": {
+    "message": "No Title"
+  },
+  "usageToday": {
+    "message": "Today $1 / $2 times",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      },
+      "limit": {
+        "content": "$2",
+        "example": "5"
+      }
+    }
+  },
+  "summarizeButton": {
+    "message": "Summarize Page"
+  },
+  "analyzingPage": {
+    "message": "Analyzing current page..."
+  },
+  "enterQuestion": {
+    "message": "Enter your question"
+  },
+  "nothingToCopy": {
+    "message": "Nothing to copy"
+  },
+  "copyFailed": {
+    "message": "Failed to copy"
+  },
+  "errorExtractContent": {
+    "message": "Cannot extract content"
+  },
+  "errorRestrictedPage": {
+    "message": "Restricted page"
+  },
+  "errorSummarize": {
+    "message": "Error during summarization"
+  },
+  "errorAnswer": {
+    "message": "Error during answer"
+  },
+  "errorDailyLimit": {
+    "message": "Daily usage limit exceeded"
+  },
+  "errorApiNotConfigured": {
+    "message": "API not configured"
+  },
+  "dailyLimitExceeded": {
+    "message": "Daily Limit Exceeded"
+  },
+  "initializationError": {
+    "message": "Initialization error"
+  },
+  "logoutFailed": {
+    "message": "Logout failed"
+  },
+  "settings": {
+    "message": "Settings"
+  },
+  "summaryResult": {
+    "message": "Summary Result"
+  },
+  "copy": {
+    "message": "Copy"
+  },
+  "askQuestion": {
+    "message": "Ask Additional Questions"
+  },
+  "questionPlaceholder": {
+    "message": "Ask any questions..."
+  },
+  "send": {
+    "message": "Send"
+  },
+  "clearHistory": {
+    "message": "Clear History"
+  },
+  "aiAnalyzing": {
+    "message": "AI is analyzing..."
+  },
+  "generatingAnswer": {
+    "message": "Generating answer..."
+  },
+  "retry": {
+    "message": "Retry"
+  },
+  "close": {
+    "message": "Close"
+  },
+  "errorCriticalTitle": {
+    "message": "Error Occurred"
+  },
+  "errorLoadHistory": {
+    "message": "Failed to load history"
+  },
+  "errorSaveHistory": {
+    "message": "Failed to save history"
+  },
+  "errorAddHistory": {
+    "message": "Failed to add history"
+  },
+  "errorExportHistory": {
+    "message": "Failed to export history"
+  },
+  "advancedSettings": {
+    "message": "Advanced Settings"
+  },
+  "autoSummarize": {
+    "message": "Auto-summarize on page load"
+  },
+  "saveHistory": {
+    "message": "Save Summary History"
+  },
+  "historyLimit": {
+    "message": "History Limit"
+  },
+  "enableContextMenu": {
+    "message": "Enable Context Menu"
+  },
+  "errorNetwork": {
+    "message": "Network error occurred"
+  },
+  "errorApiKey": {
+    "message": "API key not configured"
+  },
+  "errorStorageQuota": {
+    "message": "Storage quota exceeded"
+  },
+  "errorValidation": {
+    "message": "Invalid input value"
+  },
+  "errorTimeout": {
+    "message": "Request timeout"
+  },
+  "errorPermission": {
+    "message": "Permission required"
+  },
+  "errorCritical": {
+    "message": "Critical error occurred"
+  },
+  "upgradeToPremium": {
+    "message": "Upgrade to Premium"
+  },
+  "dailyLimitReached": {
+    "message": "You've used all free usage for today"
+  },
+  "remainingToday": {
+    "message": "Remaining today"
+  },
+  "resetTime": {
+    "message": "Reset time"
+  },
+  "premiumBenefits": {
+    "message": "Premium Benefits"
+  },
+  "unlimitedSummaries": {
+    "message": "Unlimited summaries"
+  },
+  "unlimitedQuestions": {
+    "message": "Unlimited questions"
+  },
+  "prioritySupport": {
+    "message": "Priority support"
+  },
+  "advancedFeatures": {
+    "message": "Advanced features"
+  },
+  "month": {
+    "message": "month"
+  },
+  "maybeLater": {
+    "message": "Maybe later"
+  },
+  "summaryFeature": {
+    "message": "Summary"
+  },
+  "questionFeature": {
+    "message": "Question"
+  },
+  "subscriptionAndPayment": {
+    "message": "Subscription & Payment"
+  },
+  "currentSubscription": {
+    "message": "Current Subscription"
+  },
+  "freePlanDescription": {
+    "message": "You are currently on the free plan."
+  },
+  "freeBadge": {
+    "message": "Free (5/day)"
+  },
+  "proBadge": {
+    "message": "Pro"
+  },
+  "subscribePremium": {
+    "message": "Subscribe Premium / Manage"
+  },
+  "premiumFeatures": {
+    "message": "Premium Benefits"
+  },
+  "unlimitedSummariesAndQuestions": {
+    "message": "Unlimited summaries & questions"
+  },
+  "pdfSupport": {
+    "message": "PDF file summary support"
+  },
+  "historyStorage": {
+    "message": "Cloud history storage"
+  },
+  "noAds": {
+    "message": "Ad-free experience"
+  },
+  "redirectingToSubscription": {
+    "message": "Redirecting to subscription page..."
+  },
+  "addquestions":{
+    "message": "Add question feature"
+  }
+}

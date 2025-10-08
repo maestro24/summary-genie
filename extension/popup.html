@@ -1,0 +1,181 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SummaryGenie</title>
+  <link rel="stylesheet" href="popup.css">
+  <!-- Google Fonts - Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header-modern">
+    <div class="header-content-modern">
+      <div class="logo-modern">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="logo-icon">
+          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.41 1.41"></path>
+          <path d="M2 20l1.5-1.5 2.15-2.15"></path>
+          <path d="M19 19l1.5 1.5"></path>
+        </svg>
+        <h1 class="logo-text" data-i18n="appTitle">SummaryGenie</h1>
+      </div>
+      <button id="settingsBtn" class="icon-btn-modern" data-i18n-title="settings">
+        <span class="material-icons settings-icon">settings</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content-modern">
+    
+    <!-- Page Info -->
+    <div class="page-info-modern">
+      <label class="page-info-label" data-i18n="currentPage">현재 페이지</label>
+      <div class="page-info-input-wrapper">
+        <div class="page-info-display">
+          <div id="pageTitle" class="page-title-main" data-i18n="analyzingPage">현재 페이지를 분석 중...</div>
+          <div id="pageUrl" class="page-url-sub"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary Options -->
+    <div class="summary-options-modern">
+      <p class="summary-options-label" data-i18n="summaryLength">요약 길이</p>
+      <div class="summary-options-buttons">
+        <button class="length-btn-modern" data-length="short">
+          <input type="radio" name="length" value="short" class="hidden">
+          <span data-i18n="lengthShort">짧게</span>
+        </button>
+        <button class="length-btn-modern" data-length="medium">
+          <input type="radio" name="length" value="medium" checked class="hidden">
+          <span data-i18n="lengthMedium">보통</span>
+        </button>
+        <button class="length-btn-modern" data-length="detailed">
+          <input type="radio" name="length" value="detailed" class="hidden">
+          <span data-i18n="lengthDetailed">자세히</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Summary Button -->
+    <button id="summarizeBtn" class="primary-btn-modern">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-icon">
+        <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/>
+        <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+        <path d="M8 10h8"/><path d="M8 14h8"/><path d="M8 18h8"/>
+      </svg>
+      <span data-i18n="summarizeButton">페이지 요약하기</span>
+    </button>
+
+    <!-- Loading Indicator -->
+    <div id="loadingIndicator" class="loading-indicator-modern hidden">
+      <div class="spinner-modern"></div>
+      <span class="loading-text" data-i18n="aiAnalyzing">AI가 분석 중입니다...</span>
+    </div>
+
+    <!-- Summary Result -->
+    <div id="summaryResult" class="summary-result-modern hidden">
+      <div class="result-header-modern">
+        <span class="material-icons result-icon">description</span>
+        <h3 class="result-title" data-i18n="summaryResult">요약 결과</h3>
+        <button id="copyBtn" class="icon-btn-small-modern" data-i18n-title="copy">
+          <span class="material-icons copy-icon">content_copy</span>
+        </button>
+      </div>
+      <div id="summaryText" class="summary-text-modern"></div>
+    </div>
+
+    <!-- Question Section -->
+    <div id="questionSection" class="question-section-modern hidden">
+      <div class="question-header-modern">
+        <span class="material-icons question-icon">help_outline</span>
+        <span class="question-label" data-i18n="askQuestion">추가 질문하기</span>
+      </div>
+      <div class="question-input-wrapper-modern">
+        <input 
+          type="text" 
+          id="questionInput" 
+          class="question-input-modern" 
+          data-i18n="questionPlaceholder"
+          placeholder="궁금한 점을 물어보세요..."
+        >
+        <button id="askBtn" class="ask-btn-modern" data-i18n-title="send">
+          <span class="material-icons">send</span>
+        </button>
+      </div>
+      
+      <!-- Q&A History -->
+      <div id="qaHistory" class="qa-history-modern hidden">
+        <div class="qa-history-header-modern">
+          <span class="material-icons qa-history-icon">forum</span>
+          <span class="qa-history-label" data-i18n="qaHistory">질문/답변 기록</span>
+          <button id="clearQABtn" class="icon-btn-small-modern clear-qa-btn" data-i18n-title="clearHistory">
+            <span class="material-icons">clear_all</span>
+          </button>
+        </div>
+        <div id="qaHistoryList" class="qa-history-list-modern">
+          <!-- 질문/답변 히스토리가 여기에 표시됩니다 -->
+        </div>
+      </div>
+      
+      <div id="answerResult" class="answer-result-modern hidden"></div>
+    </div>
+
+    <!-- Usage Counter -->
+    <div class="usage-counter-modern">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="usage-icon">
+        <line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/>
+      </svg>
+      <span id="usageText" data-i18n="usageToday">오늘 사용: 0/5</span>
+    </div>
+
+  </main>
+
+  <!-- Toast Message -->
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- 
+    ✅ 스크립트 로드 순서 (매우 중요!)
+    1. config.js (환경 설정 - 가장 먼저!)
+    2. 유틸리티 및 헬퍼 모듈
+    3. 핵심 모듈들 (순서대로)
+    4. popup.js (마지막)
+  -->
+  
+  <!-- 1️⃣ CONFIG: 환경 설정 (가장 먼저 로드!) -->
+  <script src="config.js"></script>
+  
+  <!-- 2️⃣ 유틸리티 모듈 -->
+  <script src="modules/utils.js"></script>
+  <script src="modules/validation.js"></script>
+  <script src="modules/security.js"></script>
+  <script src="modules/error-handler.js"></script>
+  
+  <!-- 3️⃣ 핵심 모듈 (의존성 순서대로) -->
+  <script src="modules/token-manager.js"></script>
+  <script src="modules/api-client.js"></script>
+  <script src="modules/auth-manager.js"></script>
+  
+  <!-- 4️⃣ 서비스 모듈 -->
+  <script src="modules/storage-manager.js"></script>
+  <script src="modules/settings-manager.js"></script>
+  <script src="modules/language-manager.js"></script>
+  <script src="modules/history-manager.js"></script>
+  <script src="modules/usage-manager.js"></script>
+  <script src="modules/api-service.js"></script>
+  <script src="modules/qa-manager.js"></script>
+  
+  <!-- 5️⃣ UI 모듈 -->
+  <script src="modules/ui-components.js"></script>
+  <script src="modules/ui-manager.js"></script>
+  
+  <!-- 6️⃣ 메인 스크립트 (마지막!) -->
+  <script src="popup.js"></script>
+</body>
+</html>

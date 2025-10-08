@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SummaryGenie - 로그인</title>
+  <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+  <div class="auth-container">
+    <!-- 로고 영역 -->
+    <div class="auth-header">
+      <div class="logo">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <circle cx="24" cy="24" r="20" fill="#2196F3"/>
+          <path d="M16 18h16M16 24h16M16 30h10" stroke="white" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h1 class="app-title">SummaryGenie</h1>
+      <p class="app-subtitle">AI 웹페이지 요약봇</p>
+    </div>
+
+    <!-- 탭 영역 -->
+    <div class="tab-container">
+      <button class="tab-button active" data-tab="login" aria-label="로그인 탭">
+        로그인
+      </button>
+      <button class="tab-button" data-tab="signup" aria-label="회원가입 탭">
+        회원가입
+      </button>
+    </div>
+
+    <!-- 로그인 폼 -->
+    <div id="login-form" class="auth-form active">
+      <div class="form-group">
+        <label for="login-email">이메일</label>
+        <input 
+          type="email" 
+          id="login-email" 
+          placeholder="email@example.com"
+          autocomplete="email"
+          aria-required="true"
+        >
+        <span class="error-message" id="login-email-error"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="login-password">비밀번호</label>
+        <div class="password-input-wrapper">
+          <input 
+            type="password" 
+            id="login-password" 
+            placeholder="비밀번호를 입력하세요"
+            autocomplete="current-password"
+            aria-required="true"
+          >
+          <button type="button" class="password-toggle" aria-label="비밀번호 표시/숨기기">
+            <svg class="eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </button>
+        </div>
+        <span class="error-message" id="login-password-error"></span>
+      </div>
+
+      <div class="form-options">
+        <label class="checkbox-label">
+          <input type="checkbox" id="remember-me">
+          <span>로그인 상태 유지</span>
+        </label>
+        <a href="#" class="forgot-password" id="forgot-password-link">비밀번호 찾기</a>
+      </div>
+
+      <button type="button" class="btn-primary" id="login-submit">
+        <span class="btn-text">로그인</span>
+        <span class="btn-loader" style="display: none;">
+          <svg class="spinner" width="20" height="20" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" stroke="white" stroke-width="3" fill="none" stroke-dasharray="31.4 31.4" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </button>
+
+      <div class="divider">
+        <span>또는</span>
+      </div>
+
+      <p class="auth-switch">
+        계정이 없으신가요? <a href="#" class="switch-link" data-switch="signup">회원가입</a>
+      </p>
+    </div>
+
+    <!-- 회원가입 폼 -->
+    <div id="signup-form" class="auth-form">
+      <div class="form-group">
+        <label for="signup-name">이름</label>
+        <input 
+          type="text" 
+          id="signup-name" 
+          placeholder="홍길동"
+          autocomplete="name"
+          aria-required="true"
+        >
+        <span class="error-message" id="signup-name-error"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="signup-email">이메일</label>
+        <input 
+          type="email" 
+          id="signup-email" 
+          placeholder="email@example.com"
+          autocomplete="email"
+          aria-required="true"
+        >
+        <span class="error-message" id="signup-email-error"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="signup-password">비밀번호</label>
+        <div class="password-input-wrapper">
+          <input 
+            type="password" 
+            id="signup-password" 
+            placeholder="8자 이상, 영문 대소문자, 숫자 포함"
+            autocomplete="new-password"
+            aria-required="true"
+          >
+          <button type="button" class="password-toggle" aria-label="비밀번호 표시/숨기기">
+            <svg class="eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </button>
+        </div>
+        <div class="password-strength" id="password-strength">
+          <div class="strength-bar">
+            <div class="strength-fill"></div>
+          </div>
+          <span class="strength-text"></span>
+        </div>
+        <span class="error-message" id="signup-password-error"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="signup-password-confirm">비밀번호 확인</label>
+        <input 
+          type="password" 
+          id="signup-password-confirm" 
+          placeholder="비밀번호를 다시 입력하세요"
+          autocomplete="new-password"
+          aria-required="true"
+        >
+        <span class="error-message" id="signup-password-confirm-error"></span>
+      </div>
+
+      <button type="button" class="btn-primary" id="signup-submit">
+        <span class="btn-text">회원가입</span>
+        <span class="btn-loader" style="display: none;">
+          <svg class="spinner" width="20" height="20" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" stroke="white" stroke-width="3" fill="none" stroke-dasharray="31.4 31.4" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </button>
+
+      <p class="auth-switch">
+        이미 계정이 있으신가요? <a href="#" class="switch-link" data-switch="login">로그인</a>
+      </p>
+    </div>
+
+    <!-- 알림 메시지 영역 -->
+    <div id="alert-container" class="alert-container"></div>
+  </div>
+
+  <!-- 비밀번호 재설정 모달 -->
+  <div id="reset-password-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>비밀번호 재설정</h2>
+        <button class="modal-close" aria-label="닫기">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M18 6L6 18M6 6l12 12" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>가입하신 이메일 주소를 입력하시면 비밀번호 재설정 링크를 보내드립니다.</p>
+        <div class="form-group">
+          <label for="reset-email">이메일</label>
+          <input 
+            type="email" 
+            id="reset-email" 
+            placeholder="email@example.com"
+            autocomplete="email"
+          >
+          <span class="error-message" id="reset-email-error"></span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary modal-cancel">취소</button>
+        <button type="button" class="btn-primary" id="reset-submit">
+          <span class="btn-text">재설정 링크 전송</span>
+          <span class="btn-loader" style="display: none;">
+            <svg class="spinner" width="20" height="20" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" stroke="white" stroke-width="3" fill="none" stroke-dasharray="31.4 31.4" stroke-linecap="round"/>
+            </svg>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 
+    ✅ 스크립트 로드 순서 (매우 중요!)
+    1. config.js (환경 설정 - 가장 먼저!)
+    2. token-manager.js
+    3. api-client.js
+    4. auth-manager.js
+    5. auth.js (마지막)
+  -->
+  
+  <!-- 1️⃣ CONFIG: 환경 설정 (가장 먼저 로드!) -->
+  <script src="config.js"></script>
+  
+  <!-- 2️⃣ 핵심 모듈 (의존성 순서대로) -->
+  <script src="modules/token-manager.js"></script>
+  <script src="modules/api-client.js"></script>
+  <script src="modules/auth-manager.js"></script>
+  
+  <!-- 3️⃣ 메인 스크립트 (마지막!) -->
+  <script src="auth.js"></script>
+</body>
+</html>

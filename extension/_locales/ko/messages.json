@@ -1,0 +1,588 @@
+{
+  "appTitle": {
+    "message": "SummaryGenie"
+  },
+  "generalSettings": {
+    "message": "일반 설정"
+  },
+  "interfaceLanguage": {
+    "message": "인터페이스 언어"
+  },
+  "theme": {
+    "message": "테마"
+  },
+  "themeLight": {
+    "message": "라이트"
+  },
+  "themeDark": {
+    "message": "다크"
+  },
+  "themeAuto": {
+    "message": "시스템 설정 따르기"
+  },
+  "defaultSummaryLength": {
+    "message": "기본 요약 길이"
+  },
+  "summaryLength": {
+    "message": "요약 길이"
+  },
+  "lengthShort": {
+    "message": "짧게"
+  },
+  "lengthMedium": {
+    "message": "보통"
+  },
+  "lengthDetailed": {
+    "message": "자세히"
+  },
+  "lengthShortWithDesc": {
+    "message": "짧게 (2-3문장)"
+  },
+  "lengthMediumWithDesc": {
+    "message": "보통 (4-5문장)"
+  },
+  "lengthDetailedWithDesc": {
+    "message": "자세히 (7-10문장)"
+  },
+  "apiSettings": {
+    "message": "API 설정"
+  },
+  "apiMode": {
+    "message": "API 연결 방식"
+  },
+  "proxyServer": {
+    "message": "프록시 서버 (권장)"
+  },
+  "directConnection": {
+    "message": "직접 연결 (개발용)"
+  },
+  "proxyServerHelp": {
+    "message": "프록시 서버를 사용하면 API 키를 안전하게 보호할 수 있습니다."
+  },
+  "proxyUrl": {
+    "message": "프록시 서버 URL"
+  },
+  "proxyUrlHelp": {
+    "message": "백엔드 프록시 서버 주소를 입력하세요."
+  },
+  "apiKey": {
+    "message": "OpenAI API 키"
+  },
+  "showHide": {
+    "message": "표시/숨기기"
+  },
+  "apiKeyWarning": {
+    "message": "⚠️ 직접 연결은 보안상 권장하지 않습니다. 개발 및 테스트 용도로만 사용하세요."
+  },
+  "usageStatistics": {
+    "message": "사용량 통계"
+  },
+  "todayUsage": {
+    "message": "오늘 사용"
+  },
+  "weeklyUsage": {
+    "message": "이번 주"
+  },
+  "monthlyUsage": {
+    "message": "이번 달"
+  },
+  "totalUsage": {
+    "message": "전체 사용"
+  },
+  "recentUsageChart": {
+    "message": "최근 7일 사용량"
+  },
+  "historyManagement": {
+    "message": "히스토리 관리"
+  },
+  "viewHistory": {
+    "message": "히스토리 보기"
+  },
+  "exportHistory": {
+    "message": "내보내기 (JSON)"
+  },
+  "importHistory": {
+    "message": "가져오기"
+  },
+  "deleteHistory": {
+    "message": "히스토리 삭제"
+  },
+  "cloudSync": {
+    "message": "클라우드 동기화"
+  },
+  "syncStatus": {
+    "message": "동기화 상태"
+  },
+  "lastSync": {
+    "message": "마지막 동기화"
+  },
+  "pendingItems": {
+    "message": "대기 중인 항목"
+  },
+  "syncToCloud": {
+    "message": "클라우드로 동기화"
+  },
+  "manualSync": {
+    "message": "수동 동기화"
+  },
+  "online": {
+    "message": "온라인"
+  },
+  "offline": {
+    "message": "오프라인"
+  },
+  "neverSynced": {
+    "message": "동기화 안 됨"
+  },
+  "syncing": {
+    "message": "동기화 중..."
+  },
+  "synced": {
+    "message": "동기화됨"
+  },
+  "pendingSyncItems": {
+    "message": "$1개 동기화 대기 중",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "syncCompleted": {
+    "message": "$1개 항목 동기화 완료",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "10"
+      }
+    }
+  },
+  "syncFailed": {
+    "message": "동기화 실패"
+  },
+  "confirmCloudSync": {
+    "message": "로컬 히스토리를 클라우드로 업로드하시겠습니까? 이후 모든 기기에서 히스토리를 사용할 수 있습니다."
+  },
+  "upload": {
+    "message": "업로드"
+  },
+  "cloudSyncSuccess": {
+    "message": "동기화 완료! 전체 $1개 (업로드: $2, 다운로드: $3)",
+    "placeholders": {
+      "total": {
+        "content": "$1",
+        "example": "20"
+      },
+      "uploaded": {
+        "content": "$2",
+        "example": "10"
+      },
+      "downloaded": {
+        "content": "$3",
+        "example": "10"
+      }
+    }
+  },
+  "cloudSyncFailed": {
+    "message": "클라우드 동기화 실패"
+  },
+  "noItemsToSync": {
+    "message": "동기화할 항목이 없습니다"
+  },
+  "keyboardShortcuts": {
+    "message": "키보드 단축키"
+  },
+  "summarizePage": {
+    "message": "현재 페이지 요약"
+  },
+  "focusQuestion": {
+    "message": "질문 입력창 포커스"
+  },
+  "openHistory": {
+    "message": "히스토리 열기"
+  },
+  "closePopup": {
+    "message": "팝업 닫기"
+  },
+  "information": {
+    "message": "정보"
+  },
+  "version": {
+    "message": "버전"
+  },
+  "developer": {
+    "message": "개발자"
+  },
+  "contact": {
+    "message": "문의"
+  },
+  "privacyPolicy": {
+    "message": "개인정보 처리방침"
+  },
+  "termsOfService": {
+    "message": "이용약관"
+  },
+  "resetSettings": {
+    "message": "초기화"
+  },
+  "saveSettings": {
+    "message": "저장"
+  },
+  "confirm": {
+    "message": "확인"
+  },
+  "cancel": {
+    "message": "취소"
+  },
+  "reset": {
+    "message": "초기화"
+  },
+  "delete": {
+    "message": "삭제"
+  },
+  "confirmReset": {
+    "message": "모든 설정을 초기화하시겠습니까?"
+  },
+  "confirmDeleteHistory": {
+    "message": "모든 히스토리를 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다."
+  },
+  "toastSettingsSaved": {
+    "message": "설정이 저장되었습니다"
+  },
+  "toastResetComplete": {
+    "message": "설정이 초기화되었습니다"
+  },
+  "toastHistoryCleared": {
+    "message": "히스토리가 삭제되었습니다"
+  },
+  "toastCopied": {
+    "message": "복사되었습니다"
+  },
+  "toastSaved": {
+    "message": "저장되었습니다"
+  },
+  "toastError": {
+    "message": "오류가 발생했습니다"
+  },
+  "noHistory": {
+    "message": "히스토리가 없습니다"
+  },
+  "noHistoryExport": {
+    "message": "내보낼 히스토리가 없습니다"
+  },
+  "historyExported": {
+    "message": "$1개의 히스토리를 내보냈습니다",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "15"
+      }
+    }
+  },
+  "historyImported": {
+    "message": "$1개의 새로운 히스토리를 가져왔습니다",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "8"
+      }
+    }
+  },
+  "importFailed": {
+    "message": "파일을 가져올 수 없습니다"
+  },
+  "historyDeleteFailed": {
+    "message": "히스토리 삭제에 실패했습니다"
+  },
+  "noData": {
+    "message": "데이터가 없습니다"
+  },
+  "times": {
+    "message": "회"
+  },
+  "unlimited": {
+    "message": "무제한"
+  },
+  "justNow": {
+    "message": "방금 전"
+  },
+  "minutesAgo": {
+    "message": "$1분 전",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "hoursAgo": {
+    "message": "$1시간 전",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "2"
+      }
+    }
+  },
+  "daysAgo": {
+    "message": "$1일 전",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "historyTitle": {
+    "message": "요약 히스토리"
+  },
+  "searchHistory": {
+    "message": "검색..."
+  },
+  "filterAll": {
+    "message": "전체 기간"
+  },
+  "filterToday": {
+    "message": "오늘"
+  },
+  "filterWeek": {
+    "message": "이번 주"
+  },
+  "filterMonth": {
+    "message": "이번 달"
+  },
+  "detailViewTitle": {
+    "message": "요약 상세보기"
+  },
+  "openPage": {
+    "message": "페이지 열기"
+  },
+  "summaryContent": {
+    "message": "요약 내용"
+  },
+  "qaHistory": {
+    "message": "질문/답변 기록"
+  },
+  "noTitle": {
+    "message": "제목 없음"
+  },
+  "usageToday": {
+    "message": "오늘 $1 / $2회",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      },
+      "limit": {
+        "content": "$2",
+        "example": "5"
+      }
+    }
+  },
+  "summarizeButton": {
+    "message": "페이지 요약하기"
+  },
+  "analyzingPage": {
+    "message": "현재 페이지를 분석 중..."
+  },
+  "enterQuestion": {
+    "message": "질문을 입력하세요"
+  },
+  "nothingToCopy": {
+    "message": "복사할 내용이 없습니다"
+  },
+  "copyFailed": {
+    "message": "복사에 실패했습니다"
+  },
+  "errorExtractContent": {
+    "message": "콘텐츠를 추출할 수 없습니다"
+  },
+  "errorRestrictedPage": {
+    "message": "제한된 페이지입니다"
+  },
+  "errorSummarize": {
+    "message": "요약 중 오류가 발생했습니다"
+  },
+  "errorAnswer": {
+    "message": "답변 중 오류가 발생했습니다"
+  },
+  "errorDailyLimit": {
+    "message": "오늘의 사용 한도를 초과했습니다"
+  },
+  "errorApiNotConfigured": {
+    "message": "API가 설정되지 않았습니다"
+  },
+  "dailyLimitExceeded": {
+    "message": "일일 한도 초과"
+  },
+  "initializationError": {
+    "message": "초기화 중 오류가 발생했습니다"
+  },
+  "logoutFailed": {
+    "message": "로그아웃에 실패했습니다"
+  },
+  "settings": {
+    "message": "설정"
+  },
+  "summaryResult": {
+    "message": "요약 결과"
+  },
+  "copy": {
+    "message": "복사"
+  },
+  "askQuestion": {
+    "message": "추가 질문하기"
+  },
+  "questionPlaceholder": {
+    "message": "궁금한 점을 물어보세요..."
+  },
+  "send": {
+    "message": "전송"
+  },
+  "clearHistory": {
+    "message": "히스토리 삭제"
+  },
+  "aiAnalyzing": {
+    "message": "AI가 분석 중입니다..."
+  },
+  "generatingAnswer": {
+    "message": "답변을 생성하는 중..."
+  },
+  "retry": {
+    "message": "다시 시도"
+  },
+  "close": {
+    "message": "닫기"
+  },
+  "errorCriticalTitle": {
+    "message": "오류 발생"
+  },
+  "errorLoadHistory": {
+    "message": "히스토리를 불러올 수 없습니다"
+  },
+  "errorSaveHistory": {
+    "message": "히스토리를 저장할 수 없습니다"
+  },
+  "errorAddHistory": {
+    "message": "히스토리를 추가할 수 없습니다"
+  },
+  "errorExportHistory": {
+    "message": "히스토리를 내보낼 수 없습니다"
+  },
+  "advancedSettings": {
+    "message": "고급 설정"
+  },
+  "autoSummarize": {
+    "message": "페이지 로드 시 자동 요약"
+  },
+  "saveHistory": {
+    "message": "요약 히스토리 저장"
+  },
+  "historyLimit": {
+    "message": "히스토리 제한"
+  },
+  "enableContextMenu": {
+    "message": "컨텍스트 메뉴 활성화"
+  },
+  "errorNetwork": {
+    "message": "네트워크 오류가 발생했습니다"
+  },
+  "errorApiKey": {
+    "message": "API 키가 설정되지 않았습니다"
+  },
+  "errorStorageQuota": {
+    "message": "저장 공간이 부족합니다"
+  },
+  "errorValidation": {
+    "message": "입력값이 유효하지 않습니다"
+  },
+  "errorTimeout": {
+    "message": "요청 시간이 초과되었습니다"
+  },
+  "errorPermission": {
+    "message": "권한이 필요합니다"
+  },
+  "errorCritical": {
+    "message": "심각한 오류가 발생했습니다"
+  },
+  "upgradeToPremium": {
+    "message": "프리미엄 업그레이드"
+  },
+  "dailyLimitReached": {
+    "message": "오늘의 무료 사용량을 모두 소진했습니다"
+  },
+  "remainingToday": {
+    "message": "오늘 남은 횟수"
+  },
+  "resetTime": {
+    "message": "초기화 시간"
+  },
+  "premiumBenefits": {
+    "message": "프리미엄 혜택"
+  },
+  "unlimitedSummaries": {
+    "message": "무제한 요약"
+  },
+  "unlimitedQuestions": {
+    "message": "무제한 질문"
+  },
+  "prioritySupport": {
+    "message": "우선 지원"
+  },
+  "advancedFeatures": {
+    "message": "고급 기능"
+  },
+  "month": {
+    "message": "월"
+  },
+  "maybeLater": {
+    "message": "나중에"
+  },
+  "summaryFeature": {
+    "message": "요약"
+  },
+  "questionFeature": {
+    "message": "질문"
+  },
+  "subscriptionAndPayment": {
+    "message": "구독 및 결제"
+  },
+  "currentSubscription": {
+    "message": "현재 구독 상태"
+  },
+  "freePlanDescription": {
+    "message": "무료 플랜 이용 중입니다."
+  },
+  "freeBadge": {
+    "message": "무료 (5회/일)"
+  },
+  "proBadge": {
+    "message": "프로"
+  },
+  "subscribePremium": {
+    "message": "프리미엄 구독하기 / 관리"
+  },
+  "premiumFeatures": {
+    "message": "프리미엄 혜택"
+  },
+  "unlimitedSummariesAndQuestions": {
+    "message": "무제한 요약 및 질문"
+  },
+  "pdfSupport": {
+    "message": "PDF 파일 요약 지원"
+  },
+  "historyStorage": {
+    "message": "히스토리 클라우드 저장"
+  },
+  "noAds": {
+    "message": "광고 제거"
+  },
+  "redirectingToSubscription": {
+    "message": "구독 페이지로 이동합니다..."
+  },
+  "addquestions":{
+    "message": "질문 기능 추가"
+  }
+
+}

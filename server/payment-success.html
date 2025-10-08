@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SummaryGenie - 결제 성공!</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .success-container {
+      max-width: 600px;
+      width: 100%;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      text-align: center;
+      animation: slideUp 0.5s ease-out;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .success-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 40px;
+    }
+
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      animation: checkmark 0.5s ease-in-out 0.5s forwards;
+    }
+
+    @keyframes checkmark {
+      0% {
+        transform: scale(0);
+      }
+      50% {
+        transform: scale(1.2);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .checkmark {
+      width: 50px;
+      height: 50px;
+      stroke-width: 3;
+      stroke: #667eea;
+      fill: none;
+      stroke-dasharray: 100;
+      stroke-dashoffset: 100;
+      animation: drawCheck 0.5s ease-in-out 1s forwards;
+    }
+
+    @keyframes drawCheck {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    .success-title {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .success-subtitle {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    .success-body {
+      padding: 40px;
+    }
+
+    .plan-info {
+      background: #f7f9fc;
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 30px;
+    }
+
+    .plan-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #667eea;
+      margin-bottom: 15px;
+    }
+
+    .feature-list {
+      list-style: none;
+      text-align: left;
+      margin: 20px 0;
+    }
+
+    .feature-list li {
+      padding: 10px 0;
+      padding-left: 30px;
+      position: relative;
+      color: #14171a;
+    }
+
+    .feature-list li::before {
+      content: '✨';
+      position: absolute;
+      left: 0;
+      font-size: 1.2rem;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 30px 0;
+    }
+
+    .info-card {
+      background: #f7f9fc;
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .info-label {
+      color: #657786;
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+    }
+
+    .info-value {
+      color: #14171a;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .next-steps {
+      margin-top: 30px;
+      padding-top: 30px;
+      border-top: 1px solid #e1e8ed;
+    }
+
+    .next-steps h3 {
+      font-size: 1.3rem;
+      color: #14171a;
+      margin-bottom: 20px;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      text-align: left;
+      margin-bottom: 15px;
+      padding: 15px;
+      background: #f7f9fc;
+      border-radius: 10px;
+    }
+
+    .step-number {
+      width: 30px;
+      height: 30px;
+      background: #667eea;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-right: 15px;
+      flex-shrink: 0;
+    }
+
+    .step-content {
+      flex: 1;
+    }
+
+    .step-title {
+      font-weight: 600;
+      color: #14171a;
+      margin-bottom: 5px;
+    }
+
+    .step-description {
+      color: #657786;
+      font-size: 0.9rem;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: #667eea;
+      border: 2px solid #667eea;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(102, 126, 234, 0.1);
+    }
+
+    .confetti {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 9999;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #667eea;
+      animation: confetti-fall 3s ease-out infinite;
+    }
+
+    @keyframes confetti-fall {
+      0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    .loading-spinner {
+      display: none;
+      width: 30px;
+      height: 30px;
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #667eea;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+
+    .loading-spinner.show {
+      display: block;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 600px) {
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .action-buttons {
+        flex-direction: column;
+      }
+      
+      .success-title {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Confetti Animation -->
+  <div class="confetti" id="confetti"></div>
+
+  <div class="success-container">
+    <div class="success-header">
+      <div class="success-icon">
+        <svg class="checkmark" viewBox="0 0 52 52">
+          <path d="M14 27 L22 35 L38 16"></path>
+        </svg>
+      </div>
+      <h1 class="success-title">🎉 결제 완료!</h1>
+      <p class="success-subtitle">SummaryGenie Pro에 오신 것을 환영합니다</p>
+    </div>
+
+    <div class="success-body">
+      <div class="plan-info">
+        <div class="plan-name" id="plan-name">Pro 플랜</div>
+        <ul class="feature-list">
+          <li>무제한 웹페이지 요약</li>
+          <li>고급 Q&A 기능</li>
+          <li>PDF 문서 요약 지원</li>
+          <li>90일 히스토리 보관</li>
+          <li>우선 처리 및 빠른 응답</li>
+          <li>API 액세스 (개발자용)</li>
+        </ul>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-label">구독 시작일</div>
+          <div class="info-value" id="start-date">-</div>
+        </div>
+        <div class="info-card">
+          <div class="info-label">다음 결제일</div>
+          <div class="info-value" id="next-billing">-</div>
+        </div>
+      </div>
+
+      <div class="next-steps">
+        <h3>다음 단계</h3>
+        
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <div class="step-title">Extension으로 돌아가기</div>
+            <div class="step-description">Chrome Extension을 열고 프리미엄 기능을 바로 사용해보세요</div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <div class="step-title">프리미엄 기능 활용하기</div>
+            <div class="step-description">PDF 요약, 무제한 사용 등 모든 프리미엄 기능이 활성화되었습니다</div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <div class="step-title">구독 관리</div>
+            <div class="step-description">언제든지 구독을 관리하고 결제 정보를 업데이트할 수 있습니다</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="loading-spinner" id="loader"></div>
+
+      <div class="action-buttons">
+        <button class="btn btn-primary" onclick="returnToExtension()">
+          Extension으로 돌아가기
+        </button>
+        <button class="btn btn-secondary" onclick="manageBilling()">
+          구독 관리
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 페이지 로드시 초기화
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Confetti 애니메이션
+      createConfetti();
+      
+      // URL 파라미터에서 정보 가져오기
+      const params = new URLSearchParams(window.location.search);
+      const sessionId = params.get('session_id');
+      const extensionId = params.get('extensionId');
+      
+      // 구독 정보 로드
+      await loadSubscriptionInfo(extensionId);
+      
+      // Extension과 통신
+      if (extensionId) {
+        notifyExtension(extensionId, 'payment_success');
+      }
+    });
+
+    // Confetti 애니메이션 생성
+    function createConfetti() {
+      const confettiContainer = document.getElementById('confetti');
+      const colors = ['#667eea', '#764ba2', '#ff6b6b', '#4ecdc4', '#f7b731'];
+      
+      for (let i = 0; i < 50; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.left = Math.random() * 100 + '%';
+        piece.style.animationDelay = Math.random() * 3 + 's';
+        piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+        confettiContainer.appendChild(piece);
+      }
+      
+      // 5초 후 confetti 제거
+      setTimeout(() => {
+        confettiContainer.remove();
+      }, 5000);
+    }
+
+    // 구독 정보 로드
+    async function loadSubscriptionInfo(extensionId) {
+      try {
+        const response = await fetch('/api/subscription-info', {
+          headers: {
+            'X-Extension-Id': extensionId
+          }
+        });
+        
+        if (response.ok) {
+          const data = await response.json();
+          updateUI(data);
+        }
+      } catch (error) {
+        console.error('구독 정보 로드 실패:', error);
+      }
+    }
+
+    // UI 업데이트
+    function updateUI(subscription) {
+      // 플랜 이름 업데이트
+      const planName = document.getElementById('plan-name');
+      if (subscription.plan === 'team') {
+        planName.textContent = 'Team 플랜';
+        
+        // Team 플랜 기능 목록 업데이트
+        const featureList = document.querySelector('.feature-list');
+        featureList.innerHTML = `
+          <li>Pro의 모든 기능</li>
+          <li>5명 팀 멤버 지원</li>
+          <li>365일 히스토리 보관</li>
+          <li>팀 협업 도구</li>
+          <li>관리자 대시보드</li>
+          <li>우선 지원</li>
+        `;
+      }
+      
+      // 날짜 정보 업데이트
+      const today = new Date();
+      document.getElementById('start-date').textContent = today.toLocaleDateString('ko-KR');
+      
+      if (subscription.currentPeriodEnd) {
+        const nextBilling = new Date(subscription.currentPeriodEnd * 1000);
+        document.getElementById('next-billing').textContent = nextBilling.toLocaleDateString('ko-KR');
+      }
+    }
+
+    // Extension으로 돌아가기
+    function returnToExtension() {
+      // Extension 탭 찾기
+      chrome.tabs.query({}, (tabs) => {
+        const extensionTab = tabs.find(tab => 
+          tab.url && tab.url.includes('chrome-extension://')
+        );
+        
+        if (extensionTab) {
+          chrome.tabs.update(extensionTab.id, { active: true });
+          window.close();
+        } else {
+          // Extension이 열려있지 않으면 메시지 표시
+          alert('Chrome Extension을 열어주세요!');
+        }
+      });
+      
+      // 대체 방법: 현재 창 닫기
+      setTimeout(() => {
+        window.close();
+      }, 500);
+    }
+
+    // 구독 관리 페이지로 이동
+    async function manageBilling() {
+      document.getElementById('loader').classList.add('show');
+      
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const extensionId = params.get('extensionId');
+        
+        const response = await fetch('/api/create-portal-session', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Extension-Id': extensionId
+          },
+          body: JSON.stringify({
+            returnUrl: window.location.origin + '/payment-portal.html?extensionId=' + extensionId
+          })
+        });
+        
+        const data = await response.json();
+        
+        if (data.url) {
+          window.location.href = data.url;
+        }
+      } catch (error) {
+        console.error('포털 세션 생성 실패:', error);
+        alert('구독 관리 페이지를 열 수 없습니다. 잠시 후 다시 시도해주세요.');
+      } finally {
+        document.getElementById('loader').classList.remove('show');
+      }
+    }
+
+    // Extension과 통신
+    function notifyExtension(extensionId, message) {
+      // postMessage를 통해 Extension에 알림
+      if (window.opener) {
+        window.opener.postMessage({
+          type: 'payment_success',
+          extensionId: extensionId
+        }, '*');
+      }
+      
+      // Chrome runtime API 시도
+      if (typeof chrome !== 'undefined' && chrome.runtime) {
+        try {
+          chrome.runtime.sendMessage(extensionId, {
+            type: 'payment_success'
+          });
+        } catch (e) {
+          console.log('Extension 메시지 전송 실패:', e);
+        }
+      }
+    }
+  </script>
+</body>
+</html>

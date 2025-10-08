@@ -1,0 +1,78 @@
+# ===================================================================
+# SummaryGenie Server - Google Cloud Ignore 설정
+# Cloud Run, App Engine 등 GCP 배포 시 제외할 파일
+# ===================================================================
+
+# .gcloudignore는 .gitignore와 유사하지만 클라우드 배포에 특화
+# .gitignore가 있으면 자동으로 참조되지만, 명시적으로 정의하는 것이 좋음
+
+# ===== Node.js =====
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# ===== 개발 전용 파일 =====
+.git/
+.gitignore
+.github/
+.vscode/
+.idea/
+
+# 환경변수 (GCP Secret Manager 사용)
+.env
+.env.*
+!.env.example
+
+# Firebase 서비스 계정 키 (절대 배포하지 말 것!)
+serviceAccountKey.json
+*-serviceAccountKey.json
+firebase-adminsdk-*.json
+
+# ===== 테스트 및 개발 도구 =====
+tests/
+test/
+*.test.js
+*.spec.js
+__tests__/
+coverage/
+.nyc_output/
+jest.config.js
+
+# 문서
+docs/
+*.md
+!README.md
+LICENSE
+
+# ===== 빌드 도구 설정 =====
+.eslintrc*
+.prettierrc*
+.editorconfig
+nodemon.json
+
+# ===== 로그 및 임시 파일 =====
+logs/
+*.log
+*.tmp
+*.temp
+temp/
+tmp/
+
+# ===== 백업 =====
+*.backup
+*.bak
+backup/
+
+# ===== 기타 불필요한 파일 =====
+.DS_Store
+Thumbs.db
+
+# ===== Docker 관련 (GCP에서 빌드하므로) =====
+Dockerfile
+.dockerignore
+docker-compose.yml
+
+# ===== 기획 및 설계 문서 =====
+# 프로젝트 기획서 등 (필요시 주석 해제)
+# 기획서.md
+# 로드맵.md

@@ -1,0 +1,396 @@
+{
+  "appTitle": {
+    "message": "SummaryGenie"
+  },
+  "generalSettings": {
+    "message": "常规设置"
+  },
+  "interfaceLanguage": {
+    "message": "界面语言"
+  },
+  "theme": {
+    "message": "主题"
+  },
+  "themeLight": {
+    "message": "浅色"
+  },
+  "themeDark": {
+    "message": "深色"
+  },
+  "themeAuto": {
+    "message": "跟随系统"
+  },
+  "defaultSummaryLength": {
+    "message": "默认摘要长度"
+  },
+  "summaryLength": {
+    "message": "摘要长度"
+  },
+  "lengthShort": {
+    "message": "简短"
+  },
+  "lengthMedium": {
+    "message": "中等"
+  },
+  "lengthDetailed": {
+    "message": "详细"
+  },
+  "lengthShortWithDesc": {
+    "message": "简短（2-3句）"
+  },
+  "lengthMediumWithDesc": {
+    "message": "中等（4-5句）"
+  },
+  "lengthDetailedWithDesc": {
+    "message": "详细（7-10句）"
+  },
+  "apiSettings": {
+    "message": "API设置"
+  },
+  "historyManagement": {
+    "message": "历史记录管理"
+  },
+  "viewHistory": {
+    "message": "查看历史"
+  },
+  "exportHistory": {
+    "message": "导出（JSON）"
+  },
+  "importHistory": {
+    "message": "导入"
+  },
+  "deleteHistory": {
+    "message": "删除历史"
+  },
+  "information": {
+    "message": "信息"
+  },
+  "version": {
+    "message": "版本"
+  },
+  "developer": {
+    "message": "开发者"
+  },
+  "contact": {
+    "message": "联系"
+  },
+  "privacyPolicy": {
+    "message": "隐私政策"
+  },
+  "termsOfService": {
+    "message": "服务条款"
+  },
+  "resetSettings": {
+    "message": "重置"
+  },
+  "saveSettings": {
+    "message": "保存"
+  },
+  "confirm": {
+    "message": "确认"
+  },
+  "cancel": {
+    "message": "取消"
+  },
+  "reset": {
+    "message": "重置"
+  },
+  "delete": {
+    "message": "删除"
+  },
+  "confirmReset": {
+    "message": "将所有设置重置为默认值？"
+  },
+  "confirmDeleteHistory": {
+    "message": "删除所有历史记录？此操作无法撤消。"
+  },
+  "toastSettingsSaved": {
+    "message": "设置已保存"
+  },
+  "toastResetComplete": {
+    "message": "设置已重置"
+  },
+  "toastHistoryCleared": {
+    "message": "历史已清除"
+  },
+  "toastCopied": {
+    "message": "已复制"
+  },
+  "toastSaved": {
+    "message": "已保存"
+  },
+  "toastError": {
+    "message": "发生错误"
+  },
+  "noHistory": {
+    "message": "没有历史记录"
+  },
+  "noHistoryExport": {
+    "message": "没有要导出的历史"
+  },
+  "historyExported": {
+    "message": "已导出$1条历史记录",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "15"
+      }
+    }
+  },
+  "historyImported": {
+    "message": "已导入$1条新历史记录",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "8"
+      }
+    }
+  },
+  "importFailed": {
+    "message": "无法导入文件"
+  },
+  "historyDeleteFailed": {
+    "message": "删除历史失败"
+  },
+  "noData": {
+    "message": "没有数据"
+  },
+  "times": {
+    "message": "次"
+  },
+  "unlimited": {
+    "message": "无限"
+  },
+  "justNow": {
+    "message": "刚刚"
+  },
+  "minutesAgo": {
+    "message": "$1分钟前",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "hoursAgo": {
+    "message": "$1小时前",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "2"
+      }
+    }
+  },
+  "daysAgo": {
+    "message": "$1天前",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "historyTitle": {
+    "message": "摘要历史"
+  },
+  "searchHistory": {
+    "message": "搜索..."
+  },
+  "filterAll": {
+    "message": "全部时间"
+  },
+  "filterToday": {
+    "message": "今天"
+  },
+  "filterWeek": {
+    "message": "本周"
+  },
+  "filterMonth": {
+    "message": "本月"
+  },
+  "detailViewTitle": {
+    "message": "摘要详情"
+  },
+  "openPage": {
+    "message": "打开页面"
+  },
+  "summaryContent": {
+    "message": "摘要内容"
+  },
+  "qaHistory": {
+    "message": "问答历史"
+  },
+  "noTitle": {
+    "message": "无标题"
+  },
+  "usageToday": {
+    "message": "今日 $1 / $2次",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      },
+      "limit": {
+        "content": "$2",
+        "example": "5"
+      }
+    }
+  },
+  "summarizeButton": {
+    "message": "摘要页面"
+  },
+  "analyzingPage": {
+    "message": "正在分析当前页面..."
+  },
+  "enterQuestion": {
+    "message": "请输入您的问题"
+  },
+  "nothingToCopy": {
+    "message": "没有可复制的内容"
+  },
+  "copyFailed": {
+    "message": "复制失败"
+  },
+  "errorExtractContent": {
+    "message": "无法提取内容"
+  },
+  "errorRestrictedPage": {
+    "message": "受限页面"
+  },
+  "errorSummarize": {
+    "message": "摘要过程中出错"
+  },
+  "errorAnswer": {
+    "message": "回答过程中出错"
+  },
+  "errorDailyLimit": {
+    "message": "超出今日使用限制"
+  },
+  "errorApiNotConfigured": {
+    "message": "API未配置"
+  },
+  "dailyLimitExceeded": {
+    "message": "超出每日限额"
+  },
+  "initializationError": {
+    "message": "初始化错误"
+  },
+  "logoutFailed": {
+    "message": "退出登录失败"
+  },
+  "settings": {
+    "message": "设置"
+  },
+  "summaryResult": {
+    "message": "摘要结果"
+  },
+  "copy": {
+    "message": "复制"
+  },
+  "askQuestion": {
+    "message": "提问"
+  },
+  "questionPlaceholder": {
+    "message": "请输入您的问题..."
+  },
+  "send": {
+    "message": "发送"
+  },
+  "clearHistory": {
+    "message": "清除历史"
+  },
+  "aiAnalyzing": {
+    "message": "AI正在分析..."
+  },
+  "generatingAnswer": {
+    "message": "正在生成答案..."
+  },
+  "retry": {
+    "message": "重试"
+  },
+  "close": {
+    "message": "关闭"
+  },
+  "errorCriticalTitle": {
+    "message": "错误发生"
+  },
+  "upgradeToPremium": {
+    "message": "升级到高级版"
+  },
+  "dailyLimitReached": {
+    "message": "您已用完今天的免费使用额度"
+  },
+  "remainingToday": {
+    "message": "今日剩余"
+  },
+  "resetTime": {
+    "message": "重置时间"
+  },
+  "premiumBenefits": {
+    "message": "高级版权益"
+  },
+  "unlimitedSummaries": {
+    "message": "无限摘要"
+  },
+  "unlimitedQuestions": {
+    "message": "无限提问"
+  },
+  "prioritySupport": {
+    "message": "优先支持"
+  },
+  "advancedFeatures": {
+    "message": "高级功能"
+  },
+  "month": {
+    "message": "月"
+  },
+  "maybeLater": {
+    "message": "稍后"
+  },
+  "summaryFeature": {
+    "message": "摘要"
+  },
+  "questionFeature": {
+    "message": "提问"
+  },
+  "subscriptionAndPayment": {
+    "message": "订阅与付款"
+  },
+  "currentSubscription": {
+    "message": "当前订阅"
+  },
+  "freePlanDescription": {
+    "message": "您目前正在使用免费计划。"
+  },
+  "freeBadge": {
+    "message": "免费 (5次/天)"
+  },
+  "proBadge": {
+    "message": "专业版"
+  },
+  "subscribePremium": {
+    "message": "订阅高级版 / 管理"
+  },
+  "premiumFeatures": {
+    "message": "高级版权益"
+  },
+  "unlimitedSummariesAndQuestions": {
+    "message": "无限摘要和提问"
+  },
+  "pdfSupport": {
+    "message": "PDF文件摘要支持"
+  },
+  "historyStorage": {
+    "message": "云端历史存储"
+  },
+  "noAds": {
+    "message": "无广告"
+  },
+  "redirectingToSubscription": {
+    "message": "正在跳转到订阅页面..."
+  },
+  "addquestions":{
+    "message": "添加提问功能"
+  }
+}

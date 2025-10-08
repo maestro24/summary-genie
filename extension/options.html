@@ -1,0 +1,242 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SummaryGenie 설정</title>
+  <link rel="stylesheet" href="options.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+  <!-- 메시지 박스 (Toast 대체) -->
+  <div id="message-box" class="message-box"></div>
+
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="logo-icon">
+          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.41 1.41"></path>
+          <path d="M2 20l1.5-1.5 2.15-2.15"></path>
+          <path d="M19 19l1.5 1.5"></path>
+          <path d="M21 17l1-1"></path>
+          <path d="M22 13l1-1"></path>
+        </svg>
+        <h1 data-i18n="appTitle">SummaryGenie</h1>
+      </div>
+    </header>
+
+    <!-- Settings Container -->
+    <main class="settings-container">
+      <!-- 일반 설정 -->
+      <section class="settings-section">
+        <h2 class="section-title">
+          <span class="material-icons">settings</span>
+          <span data-i18n="generalSettings">일반 설정</span>
+        </h2>
+        
+        <div class="setting-item">
+          <label for="languageSelect" data-i18n="interfaceLanguage">인터페이스 언어</label>
+          <select id="languageSelect" class="select">
+            <option value="ko">한국어</option>
+            <option value="en">English</option>
+            <option value="ja">日本語</option>
+            <option value="zh">中文</option>
+          </select>
+        </div>
+
+        <div class="setting-item">
+          <label for="themeSelect" data-i18n="theme">테마</label>
+          <select id="themeSelect" class="select">
+            <option value="light" data-i18n="themeLight">라이트</option>
+            <option value="dark" data-i18n="themeDark">다크</option>
+            <option value="auto" data-i18n="themeAuto">시스템 설정 따르기</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- 히스토리 관리 -->
+      <section class="settings-section">
+        <h2 class="section-title">
+          <span class="material-icons">history</span>
+          <span data-i18n="historyManagement">히스토리 관리</span>
+        </h2>
+        
+        <div class="history-controls">
+          <button id="viewHistoryBtn" class="history-btn">
+            <span class="material-icons">visibility</span>
+            <span data-i18n="viewHistory">보기</span>
+          </button>
+          
+          <button id="exportHistoryBtn" class="history-btn">
+            <span class="material-icons">download</span>
+            <span data-i18n="exportHistory">내보내기</span>
+          </button>
+          
+          <button id="importHistoryBtn" class="history-btn">
+            <span class="material-icons">upload</span>
+            <span data-i18n="importHistory">가져오기</span>
+          </button>
+          
+          <button id="clearHistoryBtn" class="history-btn danger">
+            <span class="material-icons">delete</span>
+            <span data-i18n="deleteHistory">삭제</span>
+          </button>
+        </div>
+
+        <input type="file" id="importFile" accept=".json" style="display: none;">
+      </section>
+
+      <!-- 구독 및 결제 섹션 (NEW) -->
+      <section class="settings-section">
+        <h2 class="section-title">
+          <span class="material-icons">payments</span>
+          <span data-i18n="subscriptionAndPayment">구독 및 결제</span>
+        </h2>
+        
+        <div class="subscription-status">
+          <div class="subscription-info">
+            <p class="subscription-title" data-i18n="currentSubscription">현재 구독 상태</p>
+            <p class="subscription-description" data-i18n="freePlanDescription">무료 플랜 이용 중입니다.</p>
+          </div>
+          <span class="subscription-badge free" data-i18n="freeBadge">무료 (5회/일)</span>
+        </div>
+
+        <button id="subscribeBtn" class="subscribe-btn">
+          <span class="material-icons">workspace_premium</span>
+          <span data-i18n="subscribePremium">프리미엄 구독하기 / 관리</span>
+        </button>
+
+        <div class="subscription-features">
+          <h3 class="features-title" data-i18n="premiumFeatures">프리미엄 혜택</h3>
+          <ul class="features-list">
+            <li>
+              <span class="material-icons">check_circle</span>
+              <span data-i18n="unlimitedSummaries">무제한 요약</span>
+            </li>
+            <li>
+              <span class="material-icons">check_circle</span>
+              <span data-i18n="addquestions">질문 기능 추가</span>
+            </li>
+            <li>
+              <span class="material-icons">check_circle</span>
+              <span data-i18n="pdfSupport">PDF 파일 요약 지원</span>
+            </li>
+            <li>
+              <span class="material-icons">check_circle</span>
+              <span data-i18n="historyStorage">히스토리 클라우드 저장</span>
+            </li>
+            
+          </ul>
+        </div>
+      </section>
+
+      <!-- 정보 -->
+      <section class="settings-section">
+        <h2 class="section-title">
+          <span class="material-icons">info</span>
+          <span data-i18n="information">정보</span>
+        </h2>
+        
+        <div class="info-content">
+          <div class="info-item">
+            <strong data-i18n="version">버전:</strong> <span id="version">1.0.0</span>
+          </div>
+          <div class="info-item">
+            <strong data-i18n="developer">개발자:</strong> <span>Ocean Code</span>
+          </div>
+          <div class="info-item">
+            <strong data-i18n="contact">문의:</strong> 
+            <a href="mailto:support@summarygenie.com">support@summarygenie.com</a>
+          </div>
+          <div class="info-links">
+            <a href="https://github.com/summarygenie" target="_blank">GitHub</a>
+            <span class="divider">|</span>
+            <a href="#" id="privacyLink" data-i18n="privacyPolicy">개인정보 처리방침</a>
+            <span class="divider">|</span>
+            <a href="#" id="termsLink" data-i18n="termsOfService">이용약관</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Action Buttons -->
+      <footer class="action-buttons">
+        <button id="resetBtn" class="secondary-btn" data-i18n="resetSettings">초기화</button>
+        <button id="saveBtn" class="primary-btn">
+          <span class="material-icons">save</span>
+          <span data-i18n="saveSettings">저장</span>
+        </button>
+      </footer>
+    </main>
+  </div>
+
+  <!-- History Modal -->
+  <div id="historyModal" class="modal hidden">
+    <div class="modal-content large">
+      <div class="modal-header">
+        <h2 data-i18n="historyTitle">요약 히스토리</h2>
+        <button id="closeHistoryBtn" class="icon-btn">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="history-filters">
+          <input type="text" id="searchHistory" class="input" data-i18n="searchHistory" placeholder="검색...">
+          <select id="filterPeriod" class="select">
+            <option value="all" data-i18n="filterAll">전체 기간</option>
+            <option value="today" data-i18n="filterToday">오늘</option>
+            <option value="week" data-i18n="filterWeek">이번 주</option>
+            <option value="month" data-i18n="filterMonth">이번 달</option>
+          </select>
+        </div>
+        <div id="historyList" class="history-list">
+          <!-- 히스토리 아이템들이 여기에 동적으로 추가됩니다 -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- History Detail Modal -->
+  <div id="historyDetailModal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="detailTitle" data-i18n="detailViewTitle">요약 상세보기</h2>
+        <div class="modal-header-buttons">
+          <button id="openPageBtn" class="icon-btn" data-i18n-title="openPage">
+            <span class="material-icons">open_in_new</span>
+          </button>
+          <button id="closeDetailBtn" class="icon-btn">
+            <span class="material-icons">close</span>
+          </button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="detail-info">
+          <div class="detail-url" id="detailUrl"></div>
+          <div class="detail-time" id="detailTime"></div>
+        </div>
+        <div class="detail-summary-container">
+          <h3 data-i18n="summaryContent">요약 내용</h3>
+          <div id="detailSummary" class="detail-summary"></div>
+        </div>
+        <div id="detailQASection" class="detail-qa-section hidden">
+          <h3 data-i18n="qaHistory">질문/답변 기록</h3>
+          <div id="detailQAList" class="detail-qa-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 모듈 로드 순서 중요 -->
+  <script src="modules/security.js"></script>
+  <script src="modules/utils.js"></script>
+  <script src="modules/error-handler.js"></script>
+  <script src="modules/storage-manager.js"></script>
+  <script src="modules/settings-manager.js"></script>
+  <script src="modules/language-manager.js"></script>
+  <script src="modules/history-manager.js"></script>
+  <script src="modules/ui-components.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

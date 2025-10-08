@@ -1,0 +1,500 @@
+알겠습니다. 방금 디자인한 **OceanCode** 웹사이트에 사용자가 브라우저 확장 프로그램 UI를 미리 경험할 수 있는 기능을 추가해 드리겠습니다.
+
+이를 위해 웹사이트 내에 **모달(Modal) 팝업** 기능을 구현하여, 사용자가 특정 버튼을 클릭하면 확장 프로그램의 UI가 화면 중앙에 나타나도록 만들었습니다. 이 모달 팝업은 확장 프로그램의 간결하고 직관적인 디자인을 미리 보여주는 역할을 합니다.
+
+아래 코드는 기존 `oceancode_summarygenie.html` 파일에 새로운 기능이 추가된 버전입니다. 이 코드를 복사하여 새로운 HTML 파일로 저장하고, 브라우저에서 열어보시면 바로 확인하실 수 있습니다.
+
+### 주요 변경 사항
+
+  * **'SummaryGenie 바로 시작하기'** 버튼을 누르면 확장 프로그램 UI가 담긴 모달 팝업이 나타납니다.
+  * 모달 팝업은 **확장 프로그램**의 핵심 기능인 '텍스트 입력', '요약' 버튼, '결과 표시' 영역으로 구성되어 있습니다.
+  * 팝업을 닫는 버튼(X)과 배경 클릭 시 팝업이 사라지는 기능을 추가하여 실제 사용자 경험을 시뮬레이션했습니다.
+
+-----
+
+### OceanCode 웹사이트 디자인 (확장 프로그램 UI 미리보기 포함)
+
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OceanCode - SummaryGenie</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap');
+
+        :root {
+            --color-deep-ocean: #0A192F;
+            --color-navy: #0F2A4F;
+            --color-aquamarine: #69D2E7;
+            --color-light-grey: #e0e0e0;
+            --color-white: #f5f5f5;
+            --color-charcoal: #2c2f33; /* 확장 프로그램 배경색 */
+            --color-dark-grey: #3c3f44;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--color-deep-ocean);
+            color: var(--color-light-grey);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- Global Styles --- */
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1, h2, h3 {
+            color: var(--color-white);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--color-aquamarine);
+            color: var(--color-navy);
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 50px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn:hover {
+            background-color: #55c4d6;
+            transform: translateY(-3px);
+        }
+
+        /* --- Header --- */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(15, 42, 79, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-aquamarine);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            font-size: 28px;
+            margin-right: 8px;
+        }
+        
+        .nav-menu a {
+            color: var(--color-light-grey);
+            text-decoration: none;
+            margin-left: 25px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--color-aquamarine);
+        }
+
+        /* --- Main Hero Section --- */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(180deg, var(--color-deep-ocean) 0%, #081423 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" /></filter><rect width="100" height="100" filter="url(%23noiseFilter)" opacity="0.15" /></svg>');
+            background-size: cover;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero .btn {
+            font-size: 1.1em;
+        }
+
+        /* --- Sections --- */
+        .section {
+            padding: 100px 0;
+            background-color: var(--color-navy);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--color-aquamarine);
+            margin: 20px auto 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .feature-item {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-item .icon {
+            font-size: 50px;
+            color: var(--color-aquamarine);
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .feature-item h3 {
+            margin-bottom: 15px;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            background-color: var(--color-deep-ocean);
+            color: var(--color-light-grey);
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer p {
+            font-size: 0.9em;
+        }
+
+        /* --- Modal (Extension UI Preview) --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 2000;
+        }
+
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .extension-modal {
+            background-color: var(--color-charcoal);
+            padding: 20px;
+            border-radius: 10px;
+            width: 350px;
+            max-width: 90%;
+            position: relative;
+            transform: translateY(-50px);
+            transition: transform 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            color: var(--color-light-grey);
+            border: 1px solid var(--color-dark-grey);
+        }
+
+        .modal-overlay.show .extension-modal {
+            transform: translateY(0);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: var(--color-light-grey);
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .close-btn:hover {
+            color: var(--color-aquamarine);
+        }
+
+        .extension-modal h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--color-white);
+        }
+
+        .extension-modal textarea {
+            width: 100%;
+            height: 150px;
+            background-color: var(--color-dark-grey);
+            color: var(--color-white);
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            resize: none;
+            margin-bottom: 10px;
+            outline: none;
+        }
+        
+        .extension-modal .btn {
+            width: 100%;
+            text-align: center;
+        }
+
+        .extension-modal .result-box {
+            background-color: var(--color-dark-grey);
+            border: 1px solid var(--color-aquamarine);
+            padding: 10px;
+            min-height: 80px;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: var(--color-light-grey);
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animated {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .animated.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .header .container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .nav-menu {
+                margin-top: 10px;
+            }
+            .hero h1 {
+                font-size: 2.5em;
+            }
+            .hero p {
+                font-size: 1em;
+            }
+            .section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <a href="#" class="logo">
+                <span class="logo-icon">&#x2248;</span> OceanCode
+            </a>
+            <nav class="nav-menu">
+                <a href="#summarygenie">SummaryGenie</a>
+                <a href="#about">회사 소개</a>
+                <a href="#contact">문의하기</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1 style="color: var(--color-aquamarine);">SummaryGenie</h1>
+                <h1>AI가 요약하는 새로운 가능성</h1>
+                <p>OceanCode의 기술력으로 당신의 정보를 깊고 빠르게 분석합니다. 문서, 논문, 기사 등 방대한 정보를 단 몇 초 만에 핵심만 요약해 드립니다.</p>
+                <button id="show-extension-btn" class="btn">SummaryGenie 바로 시작하기</button>
+            </div>
+        </section>
+
+        <section id="summarygenie" class="section animated">
+            <div class="container">
+                <h2 class="section-title">SummaryGenie, 핵심을 꿰뚫는 AI</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="icon">&#9993;</div> <h3>정확한 문서 요약</h3>
+                        <p>복잡한 보고서나 논문을 핵심 내용만 간결하게 정리해 드립니다.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon">&#x26A1;</div> <h3>초고속 정보 처리</h3>
+                        <p>수백 페이지의 내용도 단 몇 초 만에 분석하여 결과를 제공합니다.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon">&#x1F4A1;</div> <h3>통찰력 있는 분석</h3>
+                        <p>단순 요약을 넘어, 숨겨진 트렌드와 인사이트를 찾아냅니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section animated">
+            <div class="container">
+                <h2 class="section-title">OceanCode, 기술로 깊이를 더하다</h2>
+                <p style="text-align: center; max-width: 800px; margin: 0 auto; font-size: 1.1em;">
+                    OceanCode는 바다처럼 무한한 가능성을 지닌 인공지능 기술을 개발하는 기업입니다. SummaryGenie를 시작으로, 앞으로 다양한 AI 솔루션을 선보여 여러분의 삶에 새로운 가치를 창출할 것입니다.
+                </p>
+            </div>
+        </section>
+        
+        <section id="contact" class="section animated">
+            <div class="container">
+                <h2 class="section-title">문의하기</h2>
+                <p style="text-align: center;">궁금한 점이 있으신가요? 언제든지 연락 주세요.</p>
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="mailto:contact@oceancode.com" class="btn">이메일 보내기</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 OceanCode. All Rights Reserved.</p>
+    </footer>
+
+    <div id="extension-modal-overlay" class="modal-overlay">
+        <div class="extension-modal">
+            <span id="close-modal-btn" class="close-btn">&times;</span>
+            <h3>SummaryGenie 확장 프로그램</h3>
+            <textarea placeholder="요약할 텍스트를 붙여넣으세요."></textarea>
+            <button class="btn">요약하기</button>
+            <div class="result-box">
+                요약 결과가 여기에 표시됩니다.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Section animations
+            const animatedElements = document.querySelectorAll('.animated');
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+            });
+
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+
+            // Modal functionality
+            const showBtn = document.getElementById('show-extension-btn');
+            const modalOverlay = document.getElementById('extension-modal-overlay');
+            const closeBtn = document.getElementById('close-modal-btn');
+
+            // Show modal
+            showBtn.addEventListener('click', () => {
+                modalOverlay.classList.add('show');
+            });
+
+            // Close modal via button
+            closeBtn.addEventListener('click', () => {
+                modalOverlay.classList.remove('show');
+            });
+
+            // Close modal by clicking outside
+            modalOverlay.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) {
+                    modalOverlay.classList.remove('show');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
+```

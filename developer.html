@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SummaryGenie Developer Console</title>
+  <link rel="stylesheet" href="developer.css">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+  <div class="dev-container">
+    <!-- Header -->
+    <header class="dev-header">
+      <div class="header-content">
+        <div class="logo">
+          <span class="material-icons">developer_mode</span>
+          <h1>SummaryGenie 개발자 콘솔</h1>
+          <span class="version-badge">v1.0.0</span>
+        </div>
+        <div class="header-actions">
+          <button id="refreshBtn" class="icon-btn" title="새로고침">
+            <span class="material-icons">refresh</span>
+          </button>
+          <button id="clearLogsBtn" class="icon-btn" title="로그 삭제">
+            <span class="material-icons">clear_all</span>
+          </button>
+          <button id="exportBtn" class="icon-btn" title="내보내기">
+            <span class="material-icons">download</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="dev-main">
+      <!-- Sidebar Navigation -->
+      <nav class="dev-sidebar">
+        <div class="nav-section">
+          <h3>시스템 정보</h3>
+          <button class="nav-btn active" data-tab="overview">
+            <span class="material-icons">dashboard</span>
+            <span>개요</span>
+          </button>
+          <button class="nav-btn" data-tab="fingerprint">
+            <span class="material-icons">fingerprint</span>
+            <span>디바이스 핑거프린트</span>
+          </button>
+          <button class="nav-btn" data-tab="storage">
+            <span class="material-icons">storage</span>
+            <span>스토리지</span>
+          </button>
+        </div>
+        
+        <div class="nav-section">
+          <h3>API & 네트워크</h3>
+          <button class="nav-btn" data-tab="api">
+            <span class="material-icons">api</span>
+            <span>API 로그</span>
+          </button>
+          <button class="nav-btn" data-tab="cache">
+            <span class="material-icons">cached</span>
+            <span>캐시 상태</span>
+          </button>
+          <button class="nav-btn" data-tab="performance">
+            <span class="material-icons">speed</span>
+            <span>성능</span>
+          </button>
+        </div>
+        
+        <div class="nav-section">
+          <h3>테스트 도구</h3>
+          <button class="nav-btn" data-tab="test">
+            <span class="material-icons">science</span>
+            <span>테스트 스위트</span>
+          </button>
+          <button class="nav-btn" data-tab="console">
+            <span class="material-icons">terminal</span>
+            <span>콘솔</span>
+          </button>
+        </div>
+      </nav>
+
+      <!-- Content Area -->
+      <div class="dev-content">
+        <!-- Overview Tab -->
+        <div id="overview" class="tab-content active">
+          <h2>시스템 개요</h2>
+          
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-header">
+                <span class="material-icons">extension</span>
+                <span>확장프로그램 상태</span>
+              </div>
+              <div class="stat-value" id="extensionStatus">활성</div>
+              <div class="stat-label">런타임 ID: <span id="runtimeId">-</span></div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-header">
+                <span class="material-icons">dns</span>
+                <span>프록시 서버</span>
+              </div>
+              <div class="stat-value" id="proxyStatus">확인 중...</div>
+              <div class="stat-label" id="proxyUrl">-</div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-header">
+                <span class="material-icons">analytics</span>
+                <span>총 API 호출</span>
+              </div>
+              <div class="stat-value" id="totalApiCalls">0</div>
+              <div class="stat-label">오늘: <span id="todayApiCalls">0</span></div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-header">
+                <span class="material-icons">memory</span>
+                <span>메모리 사용량</span>
+              </div>
+              <div class="stat-value" id="memoryUsage">0 MB</div>
+              <div class="stat-label">스토리지: <span id="storageUsage">0 KB</span></div>
+            </div>
+          </div>
+
+          <div class="section-container">
+            <h3>시스템 정보</h3>
+            <div id="systemInfo" class="info-grid">
+              <!-- 시스템 정보가 여기에 동적으로 추가됨 -->
+            </div>
+          </div>
+
+          <div class="section-container">
+            <h3>최근 활동</h3>
+            <div id="recentActivity" class="activity-log">
+              <!-- 최근 활동 로그가 여기에 표시됨 -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Device Fingerprint Tab -->
+        <div id="fingerprint" class="tab-content">
+          <h2>디바이스 핑거프린트</h2>
+          
+          <div class="fingerprint-info">
+            <div class="info-header">
+              <h3>현재 핑거프린트</h3>
+              <button id="refreshFingerprintBtn" class="action-btn">
+                <span class="material-icons">refresh</span>
+                재생성
+              </button>
+            </div>
+            
+            <div class="fingerprint-display">
+              <div class="fingerprint-id" id="fingerprintId">
+                로딩 중...
+              </div>
+              <button id="copyFingerprintBtn" class="icon-btn" title="복사">
+                <span class="material-icons">content_copy</span>
+              </button>
+            </div>
+            
+            <div class="fingerprint-components">
+              <h4>구성 요소</h4>
+              <div id="fingerprintComponents" class="components-grid">
+                <!-- 컴포넌트 정보가 여기에 표시됨 -->
+              </div>
+            </div>
+            
+            <div class="fingerprint-stats">
+              <div class="stat-item">
+                <span class="label">생성 시간:</span>
+                <span id="fingerprintCreatedAt">-</span>
+              </div>
+              <div class="stat-item">
+                <span class="label">검증 상태:</span>
+                <span id="fingerprintVerified" class="badge">-</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Storage Tab -->
+        <div id="storage" class="tab-content">
+          <h2>스토리지 관리</h2>
+          
+          <div class="storage-overview">
+            <div class="storage-chart">
+              <canvas id="storageChart"></canvas>
+            </div>
+            
+            <div class="storage-details">
+              <h3>스토리지 세부 정보</h3>
+              <div id="storageDetails" class="storage-list">
+                <!-- 스토리지 상세 정보 -->
+              </div>
+            </div>
+          </div>
+          
+          <div class="storage-actions">
+            <button id="exportStorageBtn" class="action-btn">
+              <span class="material-icons">download</span>
+              전체 내보내기
+            </button>
+            <button id="importStorageBtn" class="action-btn">
+              <span class="material-icons">upload</span>
+              가져오기
+            </button>
+            <button id="clearStorageBtn" class="action-btn danger">
+              <span class="material-icons">delete_forever</span>
+              전체 삭제
+            </button>
+          </div>
+          
+          <input type="file" id="importFile" accept=".json" style="display: none;">
+        </div>
+
+        <!-- API Logs Tab -->
+        <div id="api" class="tab-content">
+          <h2>API 요청 로그</h2>
+          
+          <div class="log-controls">
+            <div class="filter-group">
+              <select id="apiTypeFilter" class="filter-select">
+                <option value="all">모든 타입</option>
+                <option value="summarize">요약</option>
+                <option value="question">질문</option>
+              </select>
+              
+              <select id="apiStatusFilter" class="filter-select">
+                <option value="all">모든 상태</option>
+                <option value="success">성공</option>
+                <option value="error">오류</option>
+                <option value="cached">캐시됨</option>
+              </select>
+              
+              <input type="search" id="apiSearchInput" class="search-input" placeholder="로그 검색...">
+            </div>
+            
+            <div class="log-actions">
+              <span class="log-count">총계: <span id="apiLogCount">0</span></span>
+              <button id="clearApiLogsBtn" class="action-btn small">로그 지우기</button>
+            </div>
+          </div>
+          
+          <div id="apiLogs" class="log-container">
+            <!-- API 로그가 여기에 표시됨 -->
+          </div>
+        </div>
+
+        <!-- Cache Status Tab -->
+        <div id="cache" class="tab-content">
+          <h2>캐시 상태</h2>
+          
+          <div class="cache-stats">
+            <div class="cache-card">
+              <h3>요약 캐시</h3>
+              <div class="cache-info">
+                <div class="info-item">
+                  <span>항목 수:</span>
+                  <span id="summaryCacheCount">0</span>
+                </div>
+                <div class="info-item">
+                  <span>적중률:</span>
+                  <span id="summaryCacheHitRate">0%</span>
+                </div>
+                <div class="info-item">
+                  <span>크기:</span>
+                  <span id="summaryCacheSize">0 KB</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="cache-card">
+              <h3>질문 캐시</h3>
+              <div class="cache-info">
+                <div class="info-item">
+                  <span>항목 수:</span>
+                  <span id="questionCacheCount">0</span>
+                </div>
+                <div class="info-item">
+                  <span>적중률:</span>
+                  <span id="questionCacheHitRate">0%</span>
+                </div>
+                <div class="info-item">
+                  <span>크기:</span>
+                  <span id="questionCacheSize">0 KB</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="cache-actions">
+            <button id="refreshCacheBtn" class="action-btn">
+              <span class="material-icons">refresh</span>
+              통계 새로고침
+            </button>
+            <button id="clearCacheBtn" class="action-btn danger">
+              <span class="material-icons">clear</span>
+              캐시 지우기
+            </button>
+          </div>
+          
+          <div class="cache-entries">
+            <h3>캐시 항목</h3>
+            <div id="cacheEntries" class="entries-list">
+              <!-- 캐시 엔트리 목록 -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Performance Tab -->
+        <div id="performance" class="tab-content">
+          <h2>성능 메트릭</h2>
+          
+          <div class="performance-charts">
+            <div class="chart-container">
+              <h3>응답 시간</h3>
+              <canvas id="responseTimeChart"></canvas>
+            </div>
+            
+            <div class="chart-container">
+              <h3>API 사용량</h3>
+              <canvas id="apiUsageChart"></canvas>
+            </div>
+          </div>
+          
+          <div class="performance-metrics">
+            <h3>메트릭 요약</h3>
+            <div id="metricsGrid" class="metrics-grid">
+              <!-- 성능 메트릭 -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Test Suite Tab -->
+        <div id="test" class="tab-content">
+          <h2>테스트 스위트</h2>
+          
+          <div class="test-controls">
+            <button id="runAllTestsBtn" class="action-btn primary">
+              <span class="material-icons">play_arrow</span>
+              모든 테스트 실행
+            </button>
+            <button id="stopTestsBtn" class="action-btn" disabled>
+              <span class="material-icons">stop</span>
+              중지
+            </button>
+          </div>
+          
+          <div class="test-categories">
+            <div class="test-category">
+              <h3>API 테스트</h3>
+              <div class="test-list">
+                <div class="test-item">
+                  <span class="test-name">프록시 연결</span>
+                  <button class="test-run-btn" data-test="proxy-connection">실행</button>
+                  <span class="test-status" id="test-proxy-connection">-</span>
+                </div>
+                <div class="test-item">
+                  <span class="test-name">요약 API</span>
+                  <button class="test-run-btn" data-test="summarize-api">실행</button>
+                  <span class="test-status" id="test-summarize-api">-</span>
+                </div>
+                <div class="test-item">
+                  <span class="test-name">질문 API</span>
+                  <button class="test-run-btn" data-test="question-api">실행</button>
+                  <span class="test-status" id="test-question-api">-</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="test-category">
+              <h3>스토리지 테스트</h3>
+              <div class="test-list">
+                <div class="test-item">
+                  <span class="test-name">스토리지 읽기/쓰기</span>
+                  <button class="test-run-btn" data-test="storage-rw">실행</button>
+                  <span class="test-status" id="test-storage-rw">-</span>
+                </div>
+                <div class="test-item">
+                  <span class="test-name">히스토리 관리</span>
+                  <button class="test-run-btn" data-test="history-mgmt">실행</button>
+                  <span class="test-status" id="test-history-mgmt">-</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="test-category">
+              <h3>보안 테스트</h3>
+              <div class="test-list">
+                <div class="test-item">
+                  <span class="test-name">디바이스 핑거프린트</span>
+                  <button class="test-run-btn" data-test="fingerprint">실행</button>
+                  <span class="test-status" id="test-fingerprint">-</span>
+                </div>
+                <div class="test-item">
+                  <span class="test-name">속도 제한</span>
+                  <button class="test-run-btn" data-test="rate-limit">실행</button>
+                  <span class="test-status" id="test-rate-limit">-</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="test-output">
+            <h3>테스트 출력</h3>
+            <div id="testOutput" class="output-console">
+              <!-- 테스트 출력 -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Console Tab -->
+        <div id="console" class="tab-content">
+          <h2>개발자 콘솔</h2>
+          
+          <div class="console-container">
+            <div class="console-output" id="consoleOutput">
+              <div class="console-welcome">
+                SummaryGenie 개발자 콘솔 v1.0.0<br>
+                사용 가능한 명령어를 보려면 'help'를 입력하세요<br>
+                ----------------------------------------
+              </div>
+            </div>
+            
+            <div class="console-input-container">
+              <span class="console-prompt">&gt;</span>
+              <input type="text" id="consoleInput" class="console-input" placeholder="명령어 입력...">
+              <button id="consoleSubmit" class="console-submit">
+                <span class="material-icons">send</span>
+              </button>
+            </div>
+          </div>
+          
+          <div class="console-shortcuts">
+            <h4>빠른 명령어</h4>
+            <div class="shortcuts-grid">
+              <button class="shortcut-btn" data-command="status">status</button>
+              <button class="shortcut-btn" data-command="clear">clear</button>
+              <button class="shortcut-btn" data-command="fingerprint">fingerprint</button>
+              <button class="shortcut-btn" data-command="cache.stats">cache.stats</button>
+              <button class="shortcut-btn" data-command="storage.info">storage.info</button>
+              <button class="shortcut-btn" data-command="api.health">api.health</button>
+              <button class="shortcut-btn" data-command="test.all">test.all</button>
+              <button class="shortcut-btn" data-command="export.logs">export.logs</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Status Bar -->
+    <footer class="dev-footer">
+      <div class="status-item">
+        <span class="status-indicator" id="connectionStatus"></span>
+        <span>연결</span>
+      </div>
+      <div class="status-item">
+        <span class="material-icons">schedule</span>
+        <span id="currentTime">-</span>
+      </div>
+      <div class="status-item">
+        <span>메모리: <span id="footerMemory">-</span></span>
+      </div>
+      <div class="status-item">
+        <span>API 호출: <span id="footerApiCalls">0</span></span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script type="module" src="developer.js"></script>
+</body>
+</html>

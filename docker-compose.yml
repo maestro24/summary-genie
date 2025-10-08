@@ -1,0 +1,180 @@
+version: '3.8'
+
+# ==========================================
+# SummaryGenie Docker Compose Configuration
+# ==========================================
+
+services:
+  # ===== 메인 애플리케이션 =====
+  app:
+    container_name: summarygenie-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      # 환경변수는 .env 파일에서 자동으로 로드됨
+      NODE_ENV: ${NODE_ENV:-production}
+      PORT: ${PORT:-3000}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      JWT_SECRET: ${JWT_SECRET}
+      ADMIN_KEY: ${ADMIN_KEY}
+      # MongoDB 연결
+      MONGODB_URI: mongodb://mongodb:27017/summarygenie
+      # Redis 연결
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      - mongodb
+      - redis
+    volumes:
+      # 로그 파일 영구 저장
+      - ./logs:/app/logs
+    networks:
+      - summarygenie-network
+    # 보안 설정
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
+    # 리소스 제한
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 128M
+    # 헬스체크
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 40s
+
+  # ===== MongoDB =====
+  mongodb:
+    container_name: summarygenie-mongodb
+    image: mongo:7.0-jammy
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USERNAME:-admin}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD:-changeme}
+      MONGO_INITDB_DATABASE: summarygenie
+    volumes:
+      # 데이터 영구 저장
+      - mongodb-data:/data/db
+      # 초기화 스크립트
+      - ./docker/mongodb/init.js:/docker-entrypoint-initdb.d/init.js:ro
+    networks:
+      - summarygenie-network
+    # 보안 설정
+    security_opt:
+      - no-new-privileges:true
+    # 리소스 제한
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+
+  # ===== Redis (캐싱) =====
+  redis:
+    container_name: summarygenie-redis
+    image: redis:7.2-alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    command: >
+      redis-server
+      --maxmemory 256mb
+      --maxmemory-policy allkeys-lru
+      --appendonly yes
+      --requirepass ${REDIS_PASSWORD:-changeme}
+    volumes:
+      # 데이터 영구 저장
+      - redis-data:/data
+    networks:
+      - summarygenie-network
+    # 보안 설정
+    security_opt:
+      - no-new-privileges:true
+    # 리소스 제한
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 256M
+    # 헬스체크
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+
+  # ===== Nginx (리버스 프록시, 프로덕션용) =====
+  nginx:
+    container_name: summarygenie-nginx
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./docker/nginx/ssl:/etc/nginx/ssl:ro
+      - nginx-logs:/var/log/nginx
+    depends_on:
+      - app
+    networks:
+      - summarygenie-network
+    # 보안 설정
+    security_opt:
+      - no-new-privileges:true
+    # 프로파일 (선택적 실행)
+    profiles:
+      - production
+
+# ===== 네트워크 설정 =====
+networks:
+  summarygenie-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+# ===== 볼륨 설정 =====
+volumes:
+  mongodb-data:
+    driver: local
+  redis-data:
+    driver: local
+  nginx-logs:
+    driver: local
+
+# ==========================================
+# 사용법:
+#
+# 개발 환경 실행:
+# docker-compose up -d mongodb redis
+# npm run dev
+#
+# 프로덕션 환경 실행:
+# docker-compose --profile production up -d
+#
+# 로그 확인:
+# docker-compose logs -f app
+#
+# 전체 중지:
+# docker-compose down
+#
+# 데이터 포함 전체 삭제:
+# docker-compose down -v
+# ==========================================

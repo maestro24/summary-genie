@@ -1,0 +1,396 @@
+{
+  "appTitle": {
+    "message": "SummaryGenie"
+  },
+  "generalSettings": {
+    "message": "一般設定"
+  },
+  "interfaceLanguage": {
+    "message": "インターフェース言語"
+  },
+  "theme": {
+    "message": "テーマ"
+  },
+  "themeLight": {
+    "message": "ライト"
+  },
+  "themeDark": {
+    "message": "ダーク"
+  },
+  "themeAuto": {
+    "message": "システム設定に従う"
+  },
+  "defaultSummaryLength": {
+    "message": "デフォルト要約長"
+  },
+  "summaryLength": {
+    "message": "要約長"
+  },
+  "lengthShort": {
+    "message": "短い"
+  },
+  "lengthMedium": {
+    "message": "普通"
+  },
+  "lengthDetailed": {
+    "message": "詳細"
+  },
+  "lengthShortWithDesc": {
+    "message": "短い（2-3文）"
+  },
+  "lengthMediumWithDesc": {
+    "message": "普通（4-5文）"
+  },
+  "lengthDetailedWithDesc": {
+    "message": "詳細（7-10文）"
+  },
+  "apiSettings": {
+    "message": "API設定"
+  },
+  "historyManagement": {
+    "message": "履歴管理"
+  },
+  "viewHistory": {
+    "message": "履歴を見る"
+  },
+  "exportHistory": {
+    "message": "エクスポート（JSON）"
+  },
+  "importHistory": {
+    "message": "インポート"
+  },
+  "deleteHistory": {
+    "message": "履歴を削除"
+  },
+  "information": {
+    "message": "情報"
+  },
+  "version": {
+    "message": "バージョン"
+  },
+  "developer": {
+    "message": "開発者"
+  },
+  "contact": {
+    "message": "お問い合わせ"
+  },
+  "privacyPolicy": {
+    "message": "プライバシーポリシー"
+  },
+  "termsOfService": {
+    "message": "利用規約"
+  },
+  "resetSettings": {
+    "message": "リセット"
+  },
+  "saveSettings": {
+    "message": "保存"
+  },
+  "confirm": {
+    "message": "確認"
+  },
+  "cancel": {
+    "message": "キャンセル"
+  },
+  "reset": {
+    "message": "リセット"
+  },
+  "delete": {
+    "message": "削除"
+  },
+  "confirmReset": {
+    "message": "すべての設定をデフォルト値にリセットしますか？"
+  },
+  "confirmDeleteHistory": {
+    "message": "すべての履歴を削除しますか？この操作は元に戻せません。"
+  },
+  "toastSettingsSaved": {
+    "message": "設定が保存されました"
+  },
+  "toastResetComplete": {
+    "message": "設定がリセットされました"
+  },
+  "toastHistoryCleared": {
+    "message": "履歴が削除されました"
+  },
+  "toastCopied": {
+    "message": "コピーされました"
+  },
+  "toastSaved": {
+    "message": "保存されました"
+  },
+  "toastError": {
+    "message": "エラーが発生しました"
+  },
+  "noHistory": {
+    "message": "履歴がありません"
+  },
+  "noHistoryExport": {
+    "message": "エクスポートする履歴がありません"
+  },
+  "historyExported": {
+    "message": "$1個の履歴をエクスポートしました",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "15"
+      }
+    }
+  },
+  "historyImported": {
+    "message": "$1個の新しい履歴をインポートしました",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "8"
+      }
+    }
+  },
+  "importFailed": {
+    "message": "ファイルをインポートできません"
+  },
+  "historyDeleteFailed": {
+    "message": "履歴の削除に失敗しました"
+  },
+  "noData": {
+    "message": "データがありません"
+  },
+  "times": {
+    "message": "回"
+  },
+  "unlimited": {
+    "message": "無制限"
+  },
+  "justNow": {
+    "message": "たった今"
+  },
+  "minutesAgo": {
+    "message": "$1分前",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "hoursAgo": {
+    "message": "$1時間前",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "2"
+      }
+    }
+  },
+  "daysAgo": {
+    "message": "$1日前",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "historyTitle": {
+    "message": "要約履歴"
+  },
+  "searchHistory": {
+    "message": "検索..."
+  },
+  "filterAll": {
+    "message": "全期間"
+  },
+  "filterToday": {
+    "message": "今日"
+  },
+  "filterWeek": {
+    "message": "今週"
+  },
+  "filterMonth": {
+    "message": "今月"
+  },
+  "detailViewTitle": {
+    "message": "要約の詳細"
+  },
+  "openPage": {
+    "message": "ページを開く"
+  },
+  "summaryContent": {
+    "message": "要約内容"
+  },
+  "qaHistory": {
+    "message": "質問/回答履歴"
+  },
+  "noTitle": {
+    "message": "タイトルなし"
+  },
+  "usageToday": {
+    "message": "今日 $1 / $2回",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      },
+      "limit": {
+        "content": "$2",
+        "example": "5"
+      }
+    }
+  },
+  "summarizeButton": {
+    "message": "要約する"
+  },
+  "analyzingPage": {
+    "message": "現在のページを分析中..."
+  },
+  "enterQuestion": {
+    "message": "質問を入力してください"
+  },
+  "nothingToCopy": {
+    "message": "コピーする内容がありません"
+  },
+  "copyFailed": {
+    "message": "コピーに失敗しました"
+  },
+  "errorExtractContent": {
+    "message": "コンテンツを抽出できません"
+  },
+  "errorRestrictedPage": {
+    "message": "制限されたページです"
+  },
+  "errorSummarize": {
+    "message": "要約中にエラーが発生しました"
+  },
+  "errorAnswer": {
+    "message": "回答中にエラーが発生しました"
+  },
+  "errorDailyLimit": {
+    "message": "今日の使用制限を超えました"
+  },
+  "errorApiNotConfigured": {
+    "message": "APIが設定されていません"
+  },
+  "dailyLimitExceeded": {
+    "message": "日次制限超過"
+  },
+  "initializationError": {
+    "message": "初期化エラー"
+  },
+  "logoutFailed": {
+    "message": "ログアウトに失敗しました"
+  },
+  "settings": {
+    "message": "設定"
+  },
+  "summaryResult": {
+    "message": "要約結果"
+  },
+  "copy": {
+    "message": "コピー"
+  },
+  "askQuestion": {
+    "message": "追加質問"
+  },
+  "questionPlaceholder": {
+    "message": "質問を入力してください..."
+  },
+  "send": {
+    "message": "送信"
+  },
+  "clearHistory": {
+    "message": "履歴をクリア"
+  },
+  "aiAnalyzing": {
+    "message": "AIが分析中です..."
+  },
+  "generatingAnswer": {
+    "message": "回答を生成中..."
+  },
+  "retry": {
+    "message": "再試行"
+  },
+  "close": {
+    "message": "閉じる"
+  },
+  "errorCriticalTitle": {
+    "message": "エラー発生"
+  },
+  "upgradeToPremium": {
+    "message": "プレミアムにアップグレード"
+  },
+  "dailyLimitReached": {
+    "message": "今日の無料使用量をすべて消費しました"
+  },
+  "remainingToday": {
+    "message": "今日の残り"
+  },
+  "resetTime": {
+    "message": "リセット時間"
+  },
+  "premiumBenefits": {
+    "message": "プレミアム特典"
+  },
+  "unlimitedSummaries": {
+    "message": "無制限の要約"
+  },
+  "unlimitedQuestions": {
+    "message": "無制限の質問"
+  },
+  "prioritySupport": {
+    "message": "優先サポート"
+  },
+  "advancedFeatures": {
+    "message": "高度な機能"
+  },
+  "month": {
+    "message": "月"
+  },
+  "maybeLater": {
+    "message": "後で"
+  },
+  "summaryFeature": {
+    "message": "要約"
+  },
+  "questionFeature": {
+    "message": "質問"
+  },
+  "subscriptionAndPayment": {
+    "message": "サブスクリプションと決済"
+  },
+  "currentSubscription": {
+    "message": "現在のサブスクリプション"
+  },
+  "freePlanDescription": {
+    "message": "現在、無料プランを利用中です。"
+  },
+  "freeBadge": {
+    "message": "無料 (5回/日)"
+  },
+  "proBadge": {
+    "message": "プロ"
+  },
+  "subscribePremium": {
+    "message": "プレミアムに登録 / 管理"
+  },
+  "premiumFeatures": {
+    "message": "プレミアム特典"
+  },
+  "unlimitedSummariesAndQuestions": {
+    "message": "無制限の要約と質問"
+  },
+  "pdfSupport": {
+    "message": "PDFファイル要約サポート"
+  },
+  "historyStorage": {
+    "message": "クラウド履歴ストレージ"
+  },
+  "noAds": {
+    "message": "広告なし"
+  },
+  "redirectingToSubscription": {
+    "message": "サブスクリプションページにリダイレクト中..."
+  },
+  "addquestions":{
+    "message": "質問機能の追加"
+  }
+}
