@@ -1,12 +1,16 @@
 /**
  * SummaryGenie 백엔드 서버 시작 파일
+ * Google Cloud Run 최적화 버전
  * 서버 초기화, 시작, 종료 및 에러 핸들링 담당
  * 
  * @module server
- * @version 2.0.1
+ * @version 2.1.0
  * 
- * 📝 주요 수정사항:
- * - AuthService 재초기화 추가
+ * 📝 주요 수정사항 (Cloud Run 최적화):
+ * - PORT 환경변수 동적 할당 지원 (Cloud Run 필수)
+ * - 0.0.0.0 바인딩으로 컨테이너 외부 접근 허용
+ * - 기본 포트 8080으로 변경 (Cloud Run 표준)
+ * - 환경 정보 로깅 개선
  */
 
 require('dotenv').config();
@@ -16,18 +20,18 @@ const {
   ENVIRONMENTS,
   SHUTDOWN,
   LOGGING
-} = require('./constants/index');
+} = require('./src/constants/index');
 
 // Configuration
-const { initializeFirebase, testConnection } = require('./config/firebase');
+const { initializeFirebase, testConnection } = require('./src/config/firebase');
 
 // Services
-const usageService = require('./services/UsageService');
-const { historyService } = require('./services/HistoryService');
-const authService = require('./services/AuthService'); // ✅ 추가
+const usageService = require('./src/services/UsageService');
+const { historyService } = require('./src/services/HistoryService');
+const authService = require('./src/services/AuthService');
 
 // Express App
-const createApp = require('./app');
+const createApp = require('./src/app');
 
 // ===== 환경변수 검증 =====
 
@@ -96,13 +100,14 @@ function validateCorsConfig() {
 
 /**
  * 서버 초기화 및 시작
+ * Google Cloud Run 최적화 버전
  * 
  * 실행 순서:
  * 1. 환경변수 검증
  * 2. Firebase 초기화 및 연결 테스트
- * 3. 서비스 재초기화 (✅ AuthService 추가)
+ * 3. 서비스 재초기화 (AuthService, UsageService, HistoryService)
  * 4. Express 앱 생성
- * 5. HTTP 서버 시작
+ * 5. HTTP 서버 시작 (0.0.0.0 바인딩, Cloud Run 포트 사용)
  * 6. Graceful shutdown 설정
  * 
  * @async
@@ -112,8 +117,17 @@ function validateCorsConfig() {
 async function startServer() {
   try {
     console.log('='.repeat(60));
-    console.log('🚀 SummaryGenie 서버 시작 중...');
+    console.log('🚀 SummaryGenie 서버 시작 중... (Cloud Run 최적화)');
     console.log('='.repeat(60));
+    
+    // Cloud Run 환경 감지
+    const isCloudRun = process.env.K_SERVICE !== undefined;
+    if (isCloudRun) {
+      console.log('☁️ Google Cloud Run 환경 감지');
+      console.log(`   서비스: ${process.env.K_SERVICE}`);
+      console.log(`   리비전: ${process.env.K_REVISION}`);
+      console.log(`   설정: ${process.env.K_CONFIGURATION}`);
+    }
     
     // 1. 환경변수 검증
     validateEnvironment();
@@ -152,7 +166,7 @@ async function startServer() {
       console.warn('⚠️ HistoryService 재초기화 실패:', error.message);
     }
     
-    // ✅ AuthService 재초기화 추가
+    // AuthService 재초기화
     try {
       await authService.initialize();
       console.log('✅ AuthService 재초기화 완료');
@@ -166,9 +180,13 @@ async function startServer() {
     console.log('✅ Express 앱 생성 완료');
     
     // 4. 서버 시작
-    const PORT = process.env.PORT || 3000;
-    const server = app.listen(PORT, () => {
-      printServerInfo(PORT);
+    // ✅ Cloud Run은 PORT 환경변수를 동적으로 할당 (기본 8080)
+    // ✅ 0.0.0.0으로 바인딩하여 컨테이너 외부 접근 허용
+    const PORT = parseInt(process.env.PORT || '8080', 10);
+    const HOST = '0.0.0.0'; // 컨테이너 환경 필수
+    
+    const server = app.listen(PORT, HOST, () => {
+      printServerInfo(PORT, HOST, isCloudRun);
     });
     
     // 5. Graceful shutdown 설정
@@ -183,43 +201,54 @@ async function startServer() {
 
 /**
  * 서버 정보 출력
+ * Cloud Run 환경에 맞게 최적화
  * 
  * @param {number} port - 서버 포트 번호
+ * @param {string} host - 바인딩 호스트 주소
+ * @param {boolean} isCloudRun - Cloud Run 환경 여부
  */
-function printServerInfo(port) {
+function printServerInfo(port, host, isCloudRun) {
   const env = process.env.NODE_ENV || ENVIRONMENTS.DEVELOPMENT;
-  const baseUrl = `http://localhost:${port}`;
+  const localUrl = `http://localhost:${port}`;
   
   console.log('='.repeat(60));
-  console.log(`🚀 SummaryGenie API Server v2.0`);
+  console.log(`🚀 SummaryGenie API Server v2.1`);
   console.log(`=`.repeat(60));
   console.log(`📍 포트: ${port}`);
+  console.log(`🌐 호스트: ${host}`);
   console.log(`🌍 환경: ${env}`);
-  console.log(`🔗 URL: ${baseUrl}`);
+  
+  if (isCloudRun) {
+    console.log(`☁️ 플랫폼: Google Cloud Run`);
+    console.log(`🔗 서비스 URL: Cloud Run이 자동으로 할당`);
+  } else {
+    console.log(`🔗 로컬 URL: ${localUrl}`);
+  }
+  
   console.log(`=`.repeat(60));
   console.log(`🔧 서비스 상태:`);
   console.log(`   🔐 JWT 인증: 활성화`);
   console.log(`   🔥 Firebase: ${usageService.isAvailable() ? 'Firestore' : 'Memory 모드'}`);
   console.log(`   📊 UsageService: 활성화`);
   console.log(`   📚 HistoryService: ${historyService.isAvailable() ? '활성화' : '비활성화'}`);
-  console.log(`   👤 AuthService: ${authService.isAvailable() ? '활성화' : '비활성화'}`); // ✅ 추가
+  console.log(`   👤 AuthService: ${authService.isAvailable() ? '활성화' : '비활성화'}`);
   console.log(`=`.repeat(60));
   console.log(`📡 주요 엔드포인트:`);
-  console.log(`   🏠 GET  ${baseUrl}/ (API 정보)`);
-  console.log(`   ❤️  GET  ${baseUrl}/health (헬스체크)`);
-  console.log(`   💬 POST ${baseUrl}/api/chat (채팅/요약)`);
-  console.log(`   📊 GET  ${baseUrl}/api/usage (사용량 조회)`);
-  console.log(`   📚 GET  ${baseUrl}/api/history (히스토리 조회)`);
+  console.log(`   🏠 GET  /         (API 정보)`);
+  console.log(`   ❤️  GET  /health  (헬스체크)`);
+  console.log(`   💬 POST /api/chat (채팅/요약)`);
+  console.log(`   📊 GET  /api/usage (사용량 조회)`);
+  console.log(`   📚 GET  /api/history (히스토리 조회)`);
   console.log(`=`.repeat(60));
-  console.log(`📁 프로젝트 구조:`);
-  console.log(`   server.js (서버 시작/종료)`);
-  console.log(`   ├── src/app.js (Express 설정)`);
-  console.log(`   ├── src/config/ (설정 파일)`);
-  console.log(`   ├── src/routes/ (라우터)`);
-  console.log(`   ├── src/services/ (비즈니스 로직)`);
-  console.log(`   ├── src/middleware/ (미들웨어)`);
-  console.log(`   └── src/utils/ (유틸리티)`);
-  console.log('='.repeat(60));
+  
+  if (isCloudRun) {
+    console.log(`☁️ Cloud Run 배포 정보:`);
+    console.log(`   - 자동 스케일링 활성화`);
+    console.log(`   - HTTPS 자동 적용`);
+    console.log(`   - 무료 할당량: 월 200만 요청`);
+    console.log(`=`.repeat(60));
+  }
+  
   console.log('✅ 서버가 성공적으로 시작되었습니다!');
   console.log('='.repeat(60));
 }
@@ -229,6 +258,7 @@ function printServerInfo(port) {
 /**
  * Graceful shutdown 설정
  * SIGTERM, SIGINT 신호 수신 시 안전하게 서버 종료
+ * Cloud Run은 SIGTERM 신호로 종료를 요청하므로 필수
  * 
  * @param {http.Server} server - HTTP 서버 인스턴스
  */
@@ -251,7 +281,7 @@ function setupGracefulShutdown(server) {
       process.exit(0);
     });
     
-    // 강제 종료 타이머 (기본 10초)
+    // 강제 종료 타이머 (Cloud Run은 10초 내 종료 권장)
     setTimeout(() => {
       console.error('⚠️ 타임아웃 도달, 강제 종료');
       console.error('일부 연결이 완료되지 않았을 수 있습니다');
@@ -261,10 +291,11 @@ function setupGracefulShutdown(server) {
   };
   
   // 종료 신호 리스너 등록
+  // Cloud Run은 SIGTERM으로 종료를 요청
   process.on('SIGTERM', () => shutdown('SIGTERM'));
   process.on('SIGINT', () => shutdown('SIGINT'));
   
-  console.log('✅ Graceful shutdown 설정 완료');
+  console.log('✅ Graceful shutdown 설정 완료 (SIGTERM, SIGINT)');
 }
 
 // ===== 전역 에러 핸들러 =====
@@ -282,7 +313,7 @@ process.on('unhandledRejection', (reason, promise) => {
   
   // 프로덕션에서는 로깅 서비스에 전송하는 것을 권장
   if (process.env.NODE_ENV === ENVIRONMENTS.PRODUCTION) {
-    // TODO: 로깅 서비스(Sentry, CloudWatch 등)에 전송
+    // TODO: 로깅 서비스(Cloud Logging, Sentry 등)에 전송
   }
 });
 
@@ -299,7 +330,7 @@ process.on('uncaughtException', (error) => {
   
   // 프로덕션에서는 로깅 후 프로세스 종료
   if (process.env.NODE_ENV === ENVIRONMENTS.PRODUCTION) {
-    // TODO: 로깅 서비스에 전송
+    // TODO: Cloud Logging에 전송
     console.error('프로세스를 종료합니다...');
     process.exit(1);
   } else {
